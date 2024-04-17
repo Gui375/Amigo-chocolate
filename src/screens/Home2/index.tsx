@@ -6,6 +6,7 @@ import UserService   from '../../services/UserService/UserService';
 import {User} from '../../types/types'
 
 
+
 // Importe as imagens e atribua-as diretamente a uma variável
 const mascoteImage = require('../../assets/Mascoteh1.png');
 
@@ -23,7 +24,8 @@ const Home2 = () => {
         <TouchableOpacity onPress={() => handleEdit(item.id)}>
           <Text style={styles.editButton}>Editar</Text>
         </TouchableOpacity>
-     
+
+
     </View>
   );
 
@@ -62,25 +64,29 @@ const Home2 = () => {
 const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
-    padding: 20,
-    
+    padding: 50,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    justifyContent: 'space-between', // Alinhar elementos à esquerda e botão à direita
+    justifyContent: 'space-evenly', // Alinhar elementos à esquerda e botão à direita
   },
   userInfo: {
     flexDirection: 'row',
     alignItems: 'center',
+    borderBottomColor : 'black',
+    borderTopColor: 'black'
+
   },
   userInfoText: {
-    fontSize: 16,
-    fontWeight: "bold"
+    fontSize: 40,
+    fontWeight: "bold",
+    alignContent: 'center'
   },
   photo: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 20,
+    marginRight: 100,
+    marginLeft: 0
   },
   editButton: {
     color: 'blue',

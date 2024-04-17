@@ -15,7 +15,8 @@ type StackNavigation = {
     Home : undefined;
     Home2 : undefined;
     Login : undefined;
-    Details: { userId : number | undefined};
+    // Details: { userId : number | undefined};
+    Details: { GrupoId : number | undefined};
     Cadastro : undefined;
     FGpassword : undefined
 }
@@ -39,9 +40,9 @@ export default function StackComponent(){
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen  name="Login" component={Login}   options={{headerShown: false }}  />
-                <Stack.Screen  name="Home" component={Home} />
-                <Stack.Screen  name="Home2" component={Home2} />
-                <Stack.Screen  name="Details" component={Details}   />
+                <Stack.Screen  name="Home" component={Home} options={{headerShown: false }} />
+                <Stack.Screen  name="Home2" component={Home2} options={{headerShown: false }} />
+                <Stack.Screen  name="Details" component={Details} options={{headerShown: false }}  />
                 <Stack.Screen  name="Cadastro" component={Cadastro}   />
                 <Stack.Screen  name="FGpassword" component={FGpassword}   />
 

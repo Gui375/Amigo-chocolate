@@ -1,77 +1,99 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { Button, Image, View, Platform, Text, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { StackTypes } from '../../routes/stack';
-import * as ImagePicker from 'expo-image-picker';
-import UserService   from '../../services/UserService/UserService';
-import {User} from '../../types/types'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import CustomButton from '../../components/Button';
+import { useNavigation } from '@react-navigation/native';
+import { FlatList, Text, View, Image, StyleSheet, ImageSourcePropType, TouchableOpacity } from 'react-native';
+import GrupoService  from '../../services/Grupo/GrupoService';
+import {Grupo} from '../../types/types'
 
-const Home = () => {
-    const [image, setImage] = useState('');
-    const [name, setName] = useState('');
 
-    const pickImage = async () => {
-      // No permissions request is necessary for launching the image library
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
+
+// Importe as imagens e atribua-as diretamente a uma variável
+const mascoteImage = require('../../assets/Mascoteh1.png');
+
+const Home2 = () => {
   
-      console.log(result);
-  
-      if (!result.canceled) {
-        setImage(result.assets[0].uri);
+  const [Grupos, setGrupos] = useState<Grupo[] | null>([]);
+
+  const renderItem = ({ item, index }: { item: Grupo, index: number }) => (
+    <View style={styles.item}>
+      <View style={styles.GrupoInfo}>
+        <Image source={mascoteImage} style={styles.photo}   resizeMode="contain" />
+        <Text style={styles.GrupoInfoText}>{item.nome}</Text>
+
+        <Text>Teste</Text>
+      </View>
+     
+        <TouchableOpacity onPress={() => handleEdit(item.id)}>
+          <Text style={styles.editButton}>Editar</Text>
+        </TouchableOpacity>
+
+
+    </View>
+  );
+
+  const grupoService = new GrupoService();
+  const navigation = useNavigation<StackTypes>();
+  useEffect(() => {
+    const fetchGrupos= async () => {  
+      try {
+        const fetchedGrupo = await grupoService.getAllGrupo(); // Chame o método getAllUsers
+        setGrupos(fetchedGrupo);
+      } catch (error) {
+        console.error('Erro ao buscar usuários:', error);
       }
     };
 
-    const userService = new UserService();
+    fetchGrupos();
+  }, []); // Use um array vazio para garantir que useEffect seja chamado apenas uma vez
 
-    const handleUpload = async () => {
-      try {
-        const user: User = {
-            username: name,
-            password: 'password', // Defina a senha como necessário
-            photo: image
-        };
 
-          const userAdded = await userService.addUser(user);
-          if (userAdded) {
-              console.log('Usuário adicionado com sucesso!');
-          } else {
-              console.log('Erro ao adicionar usuário');
-          }
-      } catch (error) {
-          console.error('Error uploading image:', error);
-      }
+  const handleEdit = (pGrupoId: number) => {
+    // Lógica para lidar com a edição do usuário
+    navigation.navigate('Details', {GrupoId : pGrupoId});
   };
 
-    const navigation = useNavigation<StackTypes>();
-
-return (
   
-       
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-  <Text>Nome:</Text>
-  <TextInput
-      style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10 }}
-      onChangeText={text => setName(text)}
-      value={name}
-  />
-  <CustomButton title='Selecionar Imagem' onPress={pickImage}></CustomButton>
+  return (
   
-  {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 , marginBottom: 10}} />}
-  
-  <CustomButton title='Upload' onPress={handleUpload}></CustomButton>
-</View>
-        
-   
+     <FlatList
+      data={Grupos}
+      renderItem={renderItem}
+      keyExtractor={item => item.id}
+    />
+  );
+}
 
-);
+const styles = StyleSheet.create({
+  item: {
+    flexDirection: 'row',
+    padding: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    justifyContent: 'space-evenly', // Alinhar elementos à esquerda e botão à direita
+  },
+  GrupoInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomColor : 'black',
+    borderTopColor: 'black'
 
-};
+  },
+  GrupoInfoText: {
+    fontSize: 40,
+    fontWeight: "bold",
+    alignContent: 'center'
+  },
+  photo: {
+    width: 100,
+    height: 100,
+    borderRadius: 20,
+    marginRight: 100,
+    marginLeft: 0
+  },
+  editButton: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
+});
 
-export default Home;
+export default Home2;

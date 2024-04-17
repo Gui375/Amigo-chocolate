@@ -31,7 +31,7 @@ const Login = () => {
       if (isValid) {
         setLogin('');
         setPassword('');
-        navigation.navigate('Home2');
+        navigation.navigate('Home');
       } else {
         alert('Usuário e/ou senha inválidos');
         //Alert.alert('Erro', 'Usuário e/ou senha inválidos');

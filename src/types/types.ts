@@ -7,3 +7,11 @@ export interface User {
     photo?: ImageSourcePropType;
   }
   
+
+  export interface Grupo {
+    id: number;
+    nome: string;
+    quantidade: string;
+    photo?: ImageSourcePropType;
+    //Usuários[array de usuários]
+  }
