@@ -10,7 +10,7 @@ import {Grupo} from '../../types/types'
 // Importe as imagens e atribua-as diretamente a uma variável
 const mascoteImage = require('../../assets/Mascoteh1.png');
 
-const Home2 = () => {
+const Home = () => {
   
   const [Grupos, setGrupos] = useState<Grupo[] | null>([]);
 
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home2;
+export default Home;

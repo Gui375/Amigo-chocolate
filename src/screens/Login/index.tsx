@@ -53,6 +53,7 @@ const Login = () => {
         />
         <CustomButton title='Esqueci a senha' onPress={() => navigation.navigate('FGpassword') }></CustomButton>
         <CustomButton title='Entrar' onPress={handleLogin}></CustomButton>
+        
       </ContainerLogin>
     );
   };

@@ -32,7 +32,7 @@ class GrupoService {
       return uploadResponse.status === 201; // Retorna true se o usuário foi adicionado com sucesso
     
     } catch (error) {
-      console.error('Erro ao adicionar usuário:', error);
+      console.error('Erro ao adicionar Grupo:', error);
       return false; // Retorna false em caso de erro
     }
   }
@@ -69,7 +69,7 @@ class GrupoService {
       return response.data;
       
     } catch (error) {
-        console.error('Erro ao buscar usuário pelo ID:', error);
+        console.error('Erro ao buscar grupo pelo ID:', error);
         return null;
     }
 
