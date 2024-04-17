@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList, Text, View, Image, StyleSheet, ImageSourcePropType, TouchableOpacity } from 'react-native';
 import GrupoService  from '../../services/Grupo/GrupoService';
 import {Grupo} from '../../types/types'
-
+import CustomButton from '../../components/Button';
 
 
 // Importe as imagens e atribua-as diretamente a uma variável
@@ -32,6 +32,7 @@ const Home = () => {
   );
 
   const grupoService = new GrupoService();
+  
   const navigation = useNavigation<StackTypes>();
   useEffect(() => {
     const fetchGrupos= async () => {  
@@ -42,6 +43,7 @@ const Home = () => {
         console.error('Erro ao buscar usuários:', error);
       }
     };
+
 
     fetchGrupos();
   }, []); // Use um array vazio para garantir que useEffect seja chamado apenas uma vez
@@ -54,12 +56,15 @@ const Home = () => {
 
   
   return (
-  
+      <View>
      <FlatList
       data={Grupos}
       renderItem={renderItem}
       keyExtractor={item => item.id}
     />
+
+      {/* <CustomButton  title ='Cadastrar novo Grupo' onPress={}></CustomButton> */}
+      </View>
   );
 }
 

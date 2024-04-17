@@ -14,4 +14,14 @@ export interface User {
     quantidade: string;
     photo?: ImageSourcePropType;
     //Usuários[array de usuários]
+    //interface para busca
+  }
+
+  export interface INewGrupo {
+    
+    nome: string;
+    quantidade: string;
+    photo?: ImageSourcePropType;
+    //Usuários[array de usuários]
+    //Cadastro de Grupo
   }

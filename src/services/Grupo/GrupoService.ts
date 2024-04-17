@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Grupo } from '../../types/types';
+import { Grupo, INewGrupo } from '../../types/types';
 
 const BASE_URL = 'http://localhost:3001/Grupo';//'https://localhost:7217/api/User/'
 
@@ -9,7 +9,7 @@ class GrupoService {
         // Se necessário, adicione inicializações aqui
       }
 
-  async addGrupo(grupo: Grupo): Promise<boolean> {
+  async addGrupo(grupo: INewGrupo): Promise<boolean> {
     try {
     //  const response = await axios.post(`${BASE_URL}`, Grupo);
     
