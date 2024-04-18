@@ -9,7 +9,6 @@ import { Text, TextInput, View, StyleSheet, TouchableOpacity , Alert} from 'reac
 import { ContainerLogin } from './style';
 import {INewGrupo} from '../../types/types'
 import GrupoService  from '../../services/Grupo/GrupoService';
-import GrupoService from '../../services/Grupo/GrupoService';
 
 
 const CriarGrupo = () => {
@@ -43,7 +42,7 @@ const CriarGrupo = () => {
           onChangeText={setNewQtd}
           value={NewQtd}
         />
-        {/* <CustomButton title='Esqueci a senha' onPress={}></CustomButton> */}
+        <CustomButton title='Esqueci a senha' onPress={()=> CriarGrupo}></CustomButton>
         
       </ContainerLogin>
     );

@@ -52,6 +52,7 @@ const Login = () => {
           value={password}
         />
         <CustomButton title='Esqueci a senha' onPress={() => navigation.navigate('FGpassword') }></CustomButton>
+        <CustomButton title='Cadastrar' onPress={() => navigation.navigate('Cadastro') }></CustomButton>
         <CustomButton title='Entrar' onPress={handleLogin}></CustomButton>
         
       </ContainerLogin>

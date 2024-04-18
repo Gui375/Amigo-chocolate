@@ -43,8 +43,8 @@ export default function StackComponent(){
                 <Stack.Screen  name="Home" component={Home} options={{headerShown: false }} />
                 <Stack.Screen  name="Home2" component={Home2} options={{headerShown: false }} />
                 <Stack.Screen  name="Details" component={Details} options={{headerShown: false }}  />
-                <Stack.Screen  name="Cadastro" component={Cadastro}   />
-                <Stack.Screen  name="FGpassword" component={FGpassword}   />
+                <Stack.Screen  name="Cadastro" component={Cadastro}  options={{headerShown: false }} />
+                <Stack.Screen  name="FGpassword" component={FGpassword} options={{headerShown: false }}   />
 
 
             </Stack.Navigator>

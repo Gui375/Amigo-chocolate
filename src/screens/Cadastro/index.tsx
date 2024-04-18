@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Text, TextInput, View, StyleSheet, TouchableOpacity , Alert} from 'react-native';
 import { StackTypes } from '../../routes/stack';
 import UserService   from '../../services/UserService/UserService';
-
+import CustomButton from '../../components/Button';
 
 const Cadastro = () => {
     
@@ -56,14 +56,14 @@ const Cadastro = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder="Senha"
         secureTextEntry={true}
         onChangeText={setNewPassword}
         value={NewPassword}
       />
 
 
-       <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={styles.button} activeOpacity={0.1}>
+       <TouchableOpacity  style={styles.button} activeOpacity={0.1}  onPress={()=> navigation.navigate('Login')}>
       <Text style={styles.buttonText} id=''>Criar Conta</Text>
     </TouchableOpacity>
     </div>
@@ -78,21 +78,20 @@ const Cadastro = () => {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#6495ED',
      
     },
-    div:{
-      backgroundColor : '#191970',
-      position : 'absolute',
-      padding : '1%',
-      borderRadius : 16,
-      alignItems: 'center',
-    
+    div: {
+      backgroundColor: '#FFFFFF',
+      position: 'absolute',
+      padding: '2%',
+      borderRadius: 16,
+      alignItems: 'center', // Centraliza os itens horizontalmente
+      flexDirection: 'column', // Empilha os itens verticalmente
     },
     title: {
       fontSize: 26, 
       marginBottom: 20,     
-      color:'#FFFFFF',
+      color:'#000000',
       height: 10, 
       alignItems: 'center',      
       textAlign:'center'
@@ -105,35 +104,31 @@ const Cadastro = () => {
       textAlign:'center'
     },
     input: {
-      width: '100%',
-      height: 10,
+      width: '100%', // Ocupa toda a largura disponível na div
+      height: 40, // Ajuste a altura conforme necessário
       borderColor: 'gray',
       borderWidth: 1,
       borderRadius: 2,
       marginBottom: 10,
       paddingHorizontal: 10,
-      color:'#FFFFFF',
-      padding: '2%',
-    //   textAlign:'center'
-      
-      
+      color: '#000000',
     },
     errorInput: {
       borderColor: 'red', // Alterar a cor da borda para vermelho se houver erro
     },
     button: {
-        width: '100%',
-        height: 40,
-        borderRadius: 8,
-        backgroundColor: '#836FFF',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#836FFF',
-        color:'#836FFF',
-      },
+      width: '100%', // Ocupa toda a largura disponível na div
+      height: 40, // Ajuste a altura conforme necessário
+      borderRadius: 8,
+      backgroundColor: '#fe5f55',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: '#fe5f55',
+      color: '#FFFFFF',
+    },
       buttonText: {
-        color:'#FFFFFF',
+        color:'#000000',
         fontSize: 16,
       },
       corTextoIN:{

@@ -12,5 +12,19 @@
       "password": "456",
       "photo"   : "teste.png"
     }
+ ],
+  "Grupo": [
+    {
+      "id": 1,
+      "nome": "Grupo1",
+      "quantidade": "123",
+      "photo"   : "teste.png"
+    },
+    {
+      "id": 2,
+      "nome": "Grupo2",
+      "quantidade": "123",
+      "photo"   : "teste.png"
+    }
  ]
 }

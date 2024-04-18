@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Grupo, INewGrupo } from '../../types/types';
 
-const BASE_URL = 'http://localhost:3001/Grupo';//'https://localhost:7217/api/User/'
+const BASE_URL = 'http://localhost:3000/Grupo';//'https://localhost:7217/api/User/'
 
 class GrupoService {
 

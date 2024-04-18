@@ -5,7 +5,8 @@ import { FlatList, Text, View, Image, StyleSheet, ImageSourcePropType, Touchable
 import GrupoService  from '../../services/Grupo/GrupoService';
 import {Grupo} from '../../types/types'
 import CustomButton from '../../components/Button';
-
+import { ScrollView } from 'react-native';
+import VerticalMenu from '../../components/VerticalBar';
 
 // Importe as imagens e atribua-as diretamente a uma variável
 const mascoteImage = require('../../assets/Mascoteh1.png');
@@ -15,20 +16,16 @@ const Home = () => {
   const [Grupos, setGrupos] = useState<Grupo[] | null>([]);
 
   const renderItem = ({ item, index }: { item: Grupo, index: number }) => (
+    <ScrollView contentContainerStyle={styles.container}>
     <View style={styles.item}>
       <View style={styles.GrupoInfo}>
-        <Image source={mascoteImage} style={styles.photo}   resizeMode="contain" />
+        <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
         <Text style={styles.GrupoInfoText}>{item.nome}</Text>
-
-        <Text>Teste</Text>
       </View>
-     
-        <TouchableOpacity onPress={() => handleEdit(item.id)}>
-          <Text style={styles.editButton}>Editar</Text>
-        </TouchableOpacity>
 
-
+      <CustomButton title='Editar' onPress={() => handleEdit(item.id)}></CustomButton>
     </View>
+  </ScrollView>
   );
 
   const grupoService = new GrupoService();
@@ -54,9 +51,18 @@ const Home = () => {
     navigation.navigate('Details', {GrupoId : pGrupoId});
   };
 
+  const handleItemClick = (item) => {
+    console.log(`Clicked on ${item}`);
+    // Adicione o código para lidar com o clique do item aqui
+  };
+  const menuItems = [<TouchableOpacity>Teste</TouchableOpacity>, 'Item 2', 'Item 3'];
+
+
   
   return (
+
       <View>
+      <VerticalMenu items={menuItems} onItemClick={handleItemClick} />
      <FlatList
       data={Grupos}
       renderItem={renderItem}
@@ -70,11 +76,30 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   item: {
+    // flexDirection: 'row',
+    // padding: 50,
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#ccc',
+    // justifyContent: 'space-evenly', // Alinhar elementos à esquerda e botão à direita
     flexDirection: 'row',
-    padding: 50,
-    borderBottomWidth: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderBottomWidth: 2,
     borderBottomColor: '#ccc',
-    justifyContent: 'space-evenly', // Alinhar elementos à esquerda e botão à direita
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%', // Ajuste conforme necessário
+    maxWidth: 400, // Define uma largura máxima para o item, ajuste conforme necessário
+    marginTop: 50, // Adiciona margem ao topo
+  
+  
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center', // Centraliza verticalmente
+    alignItems: 'center', // Centraliza horizontalmente
+    paddingHorizontal: 20, // Ajuste o espaço lateral conforme necessário
+    // marginTop: 50,
   },
   GrupoInfo: {
     flexDirection: 'row',
@@ -84,20 +109,22 @@ const styles = StyleSheet.create({
 
   },
   GrupoInfoText: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
-    alignContent: 'center'
+    alignContent: 'center',
+    marginLeft: 10, // Adicionei um espaçamento à esquerda para separar a imagem do texto
+  
   },
   photo: {
-    width: 100,
-    height: 100,
-    borderRadius: 20,
-    marginRight: 100,
-    marginLeft: 0
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+
   },
   editButton: {
     color: 'blue',
     textDecorationLine: 'underline',
+    fontSize: 16,
   },
 });
 
