@@ -14,3 +14,8 @@ Este é um callback que passamos para a função setShowMenu. Ele recebe o estad
 !prevState:
 Dentro do callback, estamos negando o valor do estado anterior usando o operador de negação !. Se o estado anterior for true, !prevState será false, e se o estado anterior for false, !prevState será true. Portanto, estamos alternando o valor do estado entre true e false.
 Resumindo, a função handleToggleMenu é responsável por alternar o estado do menu entre aberto e fechado. Quando a função é chamada, ela inverte o valor atual do estado showMenu, garantindo que o menu seja aberto se estiver fechado e fechado se estiver aberto.
+
+
+Comando para ligar o json server
+
+json-server --watch User.json

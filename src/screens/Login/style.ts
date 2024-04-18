@@ -12,3 +12,8 @@ font-size: 24px;
 margin-bottom: 20px;
 `;
 
+export const IconLogin = styled.Image`
+width: 180;
+height: 180;
+`;
+

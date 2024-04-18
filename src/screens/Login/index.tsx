@@ -5,11 +5,12 @@ import UserService   from '../../services/UserService/UserService';
 import CustomButton from '../../components/Button';
 import { InputLogin } from '../../components/InputLogin/style';
 import PassWordInput from '../../components/Password';
-import { ContainerLogin } from './style';
-import { Text, TextInput, View, StyleSheet, TouchableOpacity , Alert} from 'react-native';
+import { ContainerLogin , IconLogin} from './style';
 
 
 const Login = () => {
+  const mascoteImage = require('../../assets/chocolatee.png');
+
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [usernameError, setUsernameError] = useState(false);
@@ -40,6 +41,7 @@ const Login = () => {
   
     return (
       <ContainerLogin>
+        <IconLogin source={mascoteImage} resizeMode="contain" />
         <InputLogin  
           placeholder="Usuário"
           onChangeText={setLogin}

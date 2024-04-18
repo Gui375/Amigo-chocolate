@@ -7,9 +7,15 @@ import {Grupo} from '../../types/types'
 import CustomButton from '../../components/Button';
 import { ScrollView } from 'react-native';
 import VerticalMenu from '../../components/VerticalBar';
+import { Linking } from 'react-native';
+
 
 // Importe as imagens e atribua-as diretamente a uma variável
 const mascoteImage = require('../../assets/Mascoteh1.png');
+
+const reloadPage = () => {
+  Linking.openURL(''); // Qualquer URL vazia
+};
 
 const Home = () => {
   
@@ -55,7 +61,11 @@ const Home = () => {
     console.log(`Clicked on ${item}`);
     // Adicione o código para lidar com o clique do item aqui
   };
-  const menuItems = [<TouchableOpacity>Teste</TouchableOpacity>, 'Item 2', 'Item 3'];
+  const menuItems = [
+  <TouchableOpacity onPress={reloadPage}>Logout</TouchableOpacity>,
+   'Item 2', 
+   'Item 3'
+  ];
 
 
   
@@ -69,8 +79,13 @@ const Home = () => {
       keyExtractor={item => item.id}
     />
 
-      {/* <CustomButton  title ='Cadastrar novo Grupo' onPress={}></CustomButton> */}
+    <View style={styles.container}>
+       <CustomButton  title ='Cadastrar novo Grupo'></CustomButton>        
+        </View> 
+
       </View>
+
+     
   );
 }
 
@@ -104,7 +119,7 @@ const styles = StyleSheet.create({
   GrupoInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomColor : 'black',
+    borderBottomColor : 'black',  
     borderTopColor: 'black'
 
   },
@@ -126,6 +141,10 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontSize: 16,
   },
+  footer:{
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export default Home;
