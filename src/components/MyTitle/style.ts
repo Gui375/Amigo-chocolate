@@ -6,9 +6,9 @@ const FontTeste = require('../../assets/DancingScript-VariableFont_wght.ttf');
 
 
 export const Div = styled.View`
-  margin-bottom: 16px;
+  margin-bottom: 60px;
   height: 40px;
-  width: 30%;
+  width: 100%;
   flex-direction: row;
   justify-content: center; /* Centraliza horizontalmente */
   align-items: center; /* Centraliza verticalmente */
@@ -18,7 +18,7 @@ export const Div = styled.View`
 export const Titulo = styled.Text`
 fontSize: 40px;
 margin-top: 8px;
-margin-bottom: 8px; 
+margin-bottom: 10px; 
 color: '#333';
 font-family: DancingScript;
 `;

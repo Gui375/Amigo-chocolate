@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '80%', // Ajuste conforme necessário
+    width: '100%', // Ajuste conforme necessário
     maxWidth: 400, // Define uma largura máxima para o item, ajuste conforme necessário
     marginTop: 50, // Adiciona margem ao topo
   
