@@ -6,7 +6,7 @@ import CustomButton from '../../components/Button';
 import { InputLogin } from '../../components/InputLogin/style';
 import PassWordInput from '../../components/Password';
 import { ContainerLogin , IconLogin} from './style';
-
+import MyTitle from '../../components/MyTitle';
 
 const Login = () => {
   const mascoteImage = require('../../assets/chocolatee.png');
@@ -42,6 +42,7 @@ const Login = () => {
     return (
       <ContainerLogin>
         <IconLogin source={mascoteImage} resizeMode="contain" />
+        <MyTitle textoTitulo='Amigo Chocolate'></MyTitle>
         <InputLogin  
           placeholder="Usuário"
           onChangeText={setLogin}
@@ -53,10 +54,9 @@ const Login = () => {
           onChangeText={setPassword}
           value={password}
         />
-        <CustomButton title='Esqueci a senha' onPress={() => navigation.navigate('FGpassword') }></CustomButton>
-        <CustomButton title='Cadastrar' onPress={() => navigation.navigate('Cadastro') }></CustomButton>
+        <CustomButton title='Esqueci a senha' onPress={async () => { await navigation.navigate('FGpassword');}}></CustomButton>
+        <CustomButton title='Cadastrar' onPress={async () => { await navigation.navigate('Cadastro');}}></CustomButton>
         <CustomButton title='Entrar' onPress={handleLogin}></CustomButton>
-        
       </ContainerLogin>
     );
   };

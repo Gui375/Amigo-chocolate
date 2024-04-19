@@ -39,6 +39,7 @@ const VerticalMenu: React.FC<VerticalMenuProps> = ({ items, onItemClick }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
+    backgroundColor: '#EBC79E'
   },
   menuTrigger: {
     fontSize: 18,

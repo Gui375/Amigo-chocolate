@@ -8,6 +8,7 @@ import Details from '../screens/Details';
 import { RouteProp } from '@react-navigation/native';
 import Cadastro from '../screens/Cadastro';
 import FGpassword from '../screens/FGpassword';
+import CriarGrupo from '../screens/CriarGrupo/Index';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ type StackNavigation = {
     Details: { GrupoId : number | undefined};
     Cadastro : undefined;
     FGpassword : undefined
+    CriarGrupo : undefined
 }
 
 export type RootStackParamList = {
@@ -28,6 +30,8 @@ export type RootStackParamList = {
     Details: { userId: number};
     Cadastro : undefined;
     FGpassword : undefined
+    CriarGrupo : undefined
+
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>
@@ -45,6 +49,8 @@ export default function StackComponent(){
                 <Stack.Screen  name="Details" component={Details} options={{headerShown: false }}  />
                 <Stack.Screen  name="Cadastro" component={Cadastro}  options={{headerShown: false }} />
                 <Stack.Screen  name="FGpassword" component={FGpassword} options={{headerShown: false }}   />
+                <Stack.Screen  name="CriarGrupo" component={CriarGrupo} options={{headerShown: false }}   />
+
 
 
             </Stack.Navigator>

@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 interface Props {
     title:string,
     onPress: () => Promise<void>;
+    
 }
 
 

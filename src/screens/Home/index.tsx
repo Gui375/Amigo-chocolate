@@ -8,10 +8,11 @@ import CustomButton from '../../components/Button';
 import { ScrollView } from 'react-native';
 import VerticalMenu from '../../components/VerticalBar';
 import { Linking } from 'react-native';
+import { Corfundo } from './style';
 
 
 // Importe as imagens e atribua-as diretamente a uma variável
-const mascoteImage = require('../../assets/Mascoteh1.png');
+const mascoteImage = require('../../assets/GrupoIcon.png');
 
 const reloadPage = () => {
   Linking.openURL(''); // Qualquer URL vazia
@@ -70,7 +71,6 @@ const Home = () => {
 
   
   return (
-
       <View>
       <VerticalMenu items={menuItems} onItemClick={handleItemClick} />
      <FlatList
@@ -80,9 +80,8 @@ const Home = () => {
     />
 
     <View style={styles.container}>
-       <CustomButton  title ='Cadastrar novo Grupo'></CustomButton>        
+       <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton>        
         </View> 
-
       </View>
 
      
@@ -91,11 +90,6 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   item: {
-    // flexDirection: 'row',
-    // padding: 50,
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#ccc',
-    // justifyContent: 'space-evenly', // Alinhar elementos à esquerda e botão à direita
     flexDirection: 'row',
     paddingVertical: 20,
     paddingHorizontal: 10,
@@ -113,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center', // Centraliza verticalmente
     alignItems: 'center', // Centraliza horizontalmente
-    paddingHorizontal: 20, // Ajuste o espaço lateral conforme necessário
+    paddingHorizontal: 20, // Ajuste o espaço lateral conforme necessário,
     // marginTop: 50,
   },
   GrupoInfo: {

@@ -13,19 +13,20 @@ import GrupoService  from '../../services/Grupo/GrupoService';
 
 const CriarGrupo = () => {
    
-    const [NewGrupo, setNewGrupo] = useState<INewGrupo>([]);
+    const [NewGrupo, setNewGrupo] = useState<INewGrupo>({ nome: '', quantidade: '0' });
     const userService = new UserService();
-    
     const navigation = useNavigation<StackTypes>();
     const [NewNome, setNewNome] = useState<string>('');
     const [NewQtd, setNewQtd] = useState<string>('');
     const grupoService = new GrupoService();
     
-    const CadastrarGrupo = ()=>{
+    const CadastrarGrupo =  async ()=>{
       NewGrupo.nome = NewNome
       NewGrupo.quantidade = NewQtd
-      grupoService.addGrupo(NewGrupo)
+      await grupoService.addGrupo(NewGrupo)
     }
+
+
 
      
   
@@ -37,12 +38,12 @@ const CriarGrupo = () => {
           value={NewNome}
         />
         
-        <PassWordInput
+        <InputLogin
           placeholder="Quantas pessoas estão no grupo?"
           onChangeText={setNewQtd}
           value={NewQtd}
         />
-        <CustomButton title='Esqueci a senha' onPress={()=> CriarGrupo}></CustomButton>
+        <CustomButton title='Cadastrar Grupo' onPress={CadastrarGrupo}></CustomButton>
         
       </ContainerLogin>
     );
