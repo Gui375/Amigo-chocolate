@@ -5,11 +5,11 @@ export const ButtonApp = styled.TouchableOpacity`
   width: 30%;
   height: 40px;
   border-radius: 8px;
-  background-color: #fe5f55;
+  background-color: #5C3317;
   justify-content: center;
   align-items: center;
   border-width: 1px;
-  border-color: #fe5f55;
+  border-color: #5C3317;
   margin-bottom: 10px;
 `;
 

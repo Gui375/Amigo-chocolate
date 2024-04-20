@@ -62,10 +62,9 @@ const Cadastro = () => {
         value={NewPassword}
       />
 
-
-       <TouchableOpacity  style={styles.button} activeOpacity={0.1}  onPress={()=> navigation.navigate('Login')}>
-      <Text style={styles.buttonText} id=''>Criar Conta</Text>
-    </TouchableOpacity>
+      <View style={styles.container}>
+       <CustomButton title='Cadastrar' onPress={async () => { await navigation.navigate('Login')}}></CustomButton>
+       </View>
     </div>
     </View>
    

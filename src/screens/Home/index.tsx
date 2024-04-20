@@ -55,7 +55,7 @@ const Home = () => {
 
   const handleEdit = (pGrupoId: number) => {
     // Lógica para lidar com a edição do usuário
-    navigation.navigate('Details', {GrupoId : pGrupoId});
+    navigation.navigate('Home2');
   };
 
   const handleItemClick = (item) => {

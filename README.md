@@ -19,6 +19,3 @@ Resumindo, a função handleToggleMenu é responsável por alternar o estado do 
 Comando para ligar o json server
 
 json-server --watch User.json
-
-
-Teste 

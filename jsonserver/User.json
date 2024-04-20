@@ -2,45 +2,45 @@
   "User": [
     {
       "id": 1,
-      "username": "h1",
+      "username": "Guilherme",
       "password": "123",
       "photo"   : "teste.png"
     },
     {
       "id": 2,
-      "username": "h2",
+      "username": "Usuario Teste",
       "password": "456",
+      "photo"   : "teste.png"
+    },
+	{
+      "id": 3,
+      "username": "h1",
+      "password": "123",
       "photo"   : "teste.png"
     }
  ],
   "Grupo": [
     {
       "id": 1,
-      "nome": "Grupo1",
+      "nome": "Grupo 1",
       "quantidade": "123",
       "photo"   : "teste.png"
     },
     {
       "id": 2,
-      "nome": "Grupo2",
+      "nome": "Grupo 2",
       "quantidade": "123",
       "photo"   : "teste.png"
     },
 	{
       "id": 3,
-      "nome": "Grupo2",
+      "nome": "Grupo 3",
       "quantidade": "123",
       "photo"   : "teste.png"
     },
 	{
       "id": 4,
-      "nome": "Grupo2",
-      "quantidade": "123",
-      "photo"   : "teste.png"
-    },
-	{
-      "id": 5,
-      "nome": "Grupo2",
+      "nome": "Grupo 4",
       "quantidade": "123",
       "photo"   : "teste.png"
     }
