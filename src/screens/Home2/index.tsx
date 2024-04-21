@@ -59,7 +59,8 @@ const Home2 = () => {
     />
 
   <View style={styles.container}>
-     <CustomButton  title ='Enviar convite' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton>        
+    <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>
+     <CustomButton  title ='Enviar convite' onPress={async () => { await navigation.navigate('Convite');}}></CustomButton>        
       </View> 
     </View>
   );

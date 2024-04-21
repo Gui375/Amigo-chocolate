@@ -11,39 +11,40 @@ import {INewGrupo} from '../../types/types'
 import GrupoService  from '../../services/Grupo/GrupoService';
 
 
-const CriarGrupo = () => {
+const Convite = () => {
    
-    const [NewGrupo, setNewGrupo] = useState<INewGrupo>({ nome: '', quantidade: '0' });
     const userService = new UserService();
     const navigation = useNavigation<StackTypes>();
     const [NewNome, setNewNome] = useState<string>('');
-    const [NewQtd, setNewQtd] = useState<string>('');
-    const grupoService = new GrupoService();
+    const [Login, setLogin] = useState<string>('');
+    const [Email, setEmail] = useState<string>('');
+   
     
-    const CadastrarGrupo =  async ()=>{
-      NewGrupo.nome = NewNome
-      NewGrupo.quantidade = NewQtd
-      await grupoService.addGrupo(NewGrupo)
-    }
-
-
-
-     
+    
+    
+    const EnviarConvite = () => {
+        alert('Convite enviado!')
+        navigation.navigate('Home2');
+      };
   
     return (
       <ContainerLogin>
         <InputLogin  
-          placeholder="Nome Grupo"
+          placeholder="Nome do usuário final do convite"
           onChangeText={setNewNome}
           value={NewNome}
         />
-        
-        <InputLogin
-          placeholder="Quantas pessoas estão no grupo?"
-          onChangeText={setNewQtd}
-          value={NewQtd}
+        <InputLogin  
+          placeholder="Perfil do usuário"
+          onChangeText={setLogin}
+          value={NewNome}
         />
-        <CustomButton title='Cadastrar Grupo' onPress={CadastrarGrupo}></CustomButton>
+        <InputLogin  
+        placeholder="E-mail do usuário"
+        onChangeText={setEmail}
+        value={NewNome}
+      />
+        <CustomButton title='Enviar convite' onPress={async () => { await EnviarConvite}}></CustomButton>
         <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>
         
       </ContainerLogin>
@@ -51,4 +52,4 @@ const CriarGrupo = () => {
   };
   
 
-export default CriarGrupo;
+export default Convite;
