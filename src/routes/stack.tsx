@@ -55,7 +55,7 @@ export default function StackComponent(){
                 <Stack.Screen  name="Cadastro" component={Cadastro}  options={{headerShown: false }} />
                 <Stack.Screen  name="FGpassword" component={FGpassword} options={{headerShown: false }}   />
                 <Stack.Screen  name="CriarGrupo" component={CriarGrupo} options={{headerShown: false }}   />
-                <Stack.Screen  name="Convite" component={CriarGrupo} options={{headerShown: false }}   />
+                <Stack.Screen  name="Convite" component={Convite} options={{headerShown: false }}   />
 
 
 

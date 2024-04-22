@@ -23,8 +23,9 @@ const Convite = () => {
     
     
     const EnviarConvite = () => {
+      navigation.navigate('Home2');
         alert('Convite enviado!')
-        navigation.navigate('Home2');
+        
       };
   
     return (
@@ -37,12 +38,12 @@ const Convite = () => {
         <InputLogin  
           placeholder="Perfil do usuário"
           onChangeText={setLogin}
-          value={NewNome}
+          value={Login}
         />
         <InputLogin  
         placeholder="E-mail do usuário"
         onChangeText={setEmail}
-        value={NewNome}
+        value={Email}
       />
         <CustomButton title='Enviar convite' onPress={async () => { await EnviarConvite}}></CustomButton>
         <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>

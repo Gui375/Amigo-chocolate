@@ -80,7 +80,7 @@ const Home = () => {
     />
 
     <View style={styles.container}>
-       <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton>        
+       <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton> 
         </View> 
       </View>
 
