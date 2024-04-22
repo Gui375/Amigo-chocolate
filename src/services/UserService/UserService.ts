@@ -14,6 +14,7 @@ class UserService {
     //  const response = await axios.post(`${BASE_URL}`, user);
     
     const formData = new FormData();
+    formData.append('id', user.id);
     formData.append('username', user.username);
     formData.append('password', user.password);
 

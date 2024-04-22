@@ -4,6 +4,8 @@ import { Text, TextInput, View, StyleSheet, TouchableOpacity , Alert} from 'reac
 import { StackTypes } from '../../routes/stack';
 import UserService   from '../../services/UserService/UserService';
 import CustomButton from '../../components/Button';
+import { User } from '../../types/types';
+
 
 const Cadastro = () => {
     
@@ -14,13 +16,27 @@ const Cadastro = () => {
    
   //Declaração de variaveis
   const [Newlogin, setNewLogin] = useState<string>('');
-  const [NewEmail, setNewEmail] = useState<string>('');
+  const [NewId, setNewId] = useState<number>(0);
   const [NewIdade, setNewIdade] = useState<string>('');
   const [NewPassword, setNewPassword] = useState<string>('');
   const [usernameError, setUsernameError] = useState(false);
 
   const userService = new UserService();
- 
+
+ const handleCadastroUsuario = async (user: User) => {
+    const userService = new UserService();
+    try {
+        const success = await userService.addUser(user);
+        if (success) {
+           navigation.navigate('Login')
+        } else {
+          alert('Não foi possivel gravar usuário')
+        }
+    } catch (error) {
+        // Tratar erro de requisição ou outros erros
+    }
+};
+
 
 //O que será mostrado no site
   return (
@@ -32,25 +48,13 @@ const Cadastro = () => {
         <br />
       <TextInput
         style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="E-mail"
-        onChangeText={setNewEmail}
-        value={NewEmail}
+        placeholder="Id"
+        onChangeText={setNewId}
+        value={NewId}
       />
       <TextInput
         style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Nome Completo"
-        onChangeText={setNewLogin}
-        value={Newlogin}
-      />
-       <TextInput
-        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Idade"
-        onChangeText={setNewIdade}
-        value={NewIdade}
-      />
-      <TextInput
-        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Usuário"
+        placeholder="Login"
         onChangeText={setNewLogin}
         value={Newlogin}
       />
@@ -63,7 +67,7 @@ const Cadastro = () => {
       />
 
       <View style={styles.container}>
-       <CustomButton title='Cadastrar' onPress={async () => { await navigation.navigate('Login')}}></CustomButton>
+       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario({ id: NewId, username: Newlogin, password: NewPassword})}></CustomButton>
        </View>
     </div>
     </View>
