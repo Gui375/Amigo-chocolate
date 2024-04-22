@@ -51,6 +51,7 @@ const Home2 = () => {
 
   
   return (
+    <ScrollView>
      <View>
     <FlatList
       data={users}
@@ -63,6 +64,7 @@ const Home2 = () => {
      <CustomButton  title ='Enviar convite' onPress={async () => { await navigation.navigate('Convite');}}></CustomButton>        
       </View> 
     </View>
+    </ScrollView>
   );
 }
 

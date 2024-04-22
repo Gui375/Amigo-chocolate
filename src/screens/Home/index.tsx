@@ -71,6 +71,7 @@ const Home = () => {
 
   
   return (
+    <ScrollView>
       <View>
       <VerticalMenu items={menuItems} onItemClick={handleItemClick} />
      <FlatList
@@ -82,7 +83,9 @@ const Home = () => {
     <View style={styles.container}>
        <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton> 
         </View> 
+        
       </View>
+      </ScrollView>
 
      
   );
