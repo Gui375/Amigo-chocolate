@@ -10,7 +10,7 @@ export const ButtonApp = styled.TouchableOpacity`
   align-items: center;
   border-width: 1px;
   border-color: #5C3317;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `;
 
 

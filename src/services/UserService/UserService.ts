@@ -24,7 +24,8 @@ class UserService {
 
     formData.append('photo', blob, 'photo.jpg');
 
-    const uploadResponse = await axios.post(BASE_URL+'addUser', formData, {
+    // const uploadResponse = await axios.post(BASE_URL+'addUser', formData, {
+      const uploadResponse = await axios.post(`${BASE_URL}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
