@@ -4,7 +4,7 @@ export interface User {
     id: number;
     username: string;
     password: string;
-    photo?: ImageSourcePropType;
+    photo?: string;
   }
   
 
@@ -12,7 +12,7 @@ export interface User {
     id: number;
     nome: string;
     quantidade: string;
-    photo?: ImageSourcePropType;
+    photo?: string;
     //Usuários[array de usuários]
     //interface para busca
   }
@@ -21,7 +21,7 @@ export interface User {
     
     nome: string;
     quantidade: string;
-    photo?: ImageSourcePropType;
+    photo?: string;
     //Usuários[array de usuários]
     //Cadastro de Grupo
   }

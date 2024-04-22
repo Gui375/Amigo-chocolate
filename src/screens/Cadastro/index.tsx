@@ -28,6 +28,7 @@ const Cadastro = () => {
     try {
         const success = await userService.addUser(user);
         if (success) {
+          alert('Usuário Cadastrado com sucesso!')
            navigation.navigate('Login')
         } else {
           alert('Não foi possivel gravar usuário')
@@ -67,7 +68,7 @@ const Cadastro = () => {
       />
 
       <View style={styles.container}>
-       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario({ id: NewId, username: Newlogin, password: NewPassword})}></CustomButton>
+       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario({ id: NewId, username: Newlogin, password: NewPassword,photo: ''})}></CustomButton>
        </View>
     </div>
     </View>
