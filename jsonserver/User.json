@@ -1,12 +1,6 @@
 {
   "User": [
     {
-      "id": "1",
-      "username": "Guilherme",
-      "password": "123",
-      "photo": "teste.png"
-    },
-    {
       "id": "2",
       "username": "Usuario Teste",
       "password": "456",
@@ -35,26 +29,32 @@
     {
       "id": "1",
       "nome": "Grupo 1",
-      "quantidade": "123",
+      "quantidade": 12,
       "photo": "teste.png"
     },
     {
       "id": "2",
       "nome": "Grupo 2",
-      "quantidade": "123",
+      "quantidade": 1,
       "photo": "teste.png"
     },
     {
       "id": "3",
       "nome": "Grupo 3",
-      "quantidade": "123",
+      "quantidade": 8,
       "photo": "teste.png"
     },
     {
       "id": "4",
       "nome": "Grupo 4",
-      "quantidade": "123",
+      "quantidade": 15,
       "photo": "teste.png"
+    },
+    {
+      "id": "5",
+      "nome": "Teste",
+      "quantidade": "1",
+      "photo": ""
     }
   ]
 }

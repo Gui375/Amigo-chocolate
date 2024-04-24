@@ -11,7 +11,7 @@ export interface User {
   export interface Grupo {
     id: number;
     nome: string;
-    quantidade: string;
+    quantidade: number;
     photo?: string;
     //Usuários[array de usuários]
     //interface para busca

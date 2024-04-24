@@ -38,6 +38,27 @@ class UserService {
   //     return false; // Retorna false em caso de erro
   //   }
   // }
+  async removeUser(userId: number): Promise<boolean> {
+    try {
+      // Verifica se o usuário existe na API
+      const existingUser = await this.getUserById(userId);
+      if (!existingUser) {
+        console.error('Erro ao excluir usuário: Usuário não encontrado');
+        return false; // Retorna false se o usuário não for encontrado
+      }
+  
+      // Se o usuário existe, faz a requisição para excluí-lo
+      const response = await axios.delete(`${BASE_URL}/${userId}`);
+      return response.status === 200; // Retorna true se o usuário foi excluído com sucesso
+  
+    } catch (error) {
+      console.error('Erro ao excluir usuário:', error);
+      return false; // Retorna false em caso de erro
+    }
+  }
+
+
+
 
   async addUser(user: User): Promise<boolean> {
     try {
@@ -61,7 +82,6 @@ class UserService {
   async validateUser(username: string, password: string): Promise<boolean> {
     try {
         const response: AxiosResponse<User[]> = await axios.get(`${BASE_URL}?username=${username}&password=${password}`);
-        //na aplicação de vocês não retorna array não e o metodo sera um post que retorna um unico usuario.
         if (response.data.length === 0) {
           return false;
         }
@@ -75,18 +95,18 @@ class UserService {
 
   
   
-  async getUserById(userId: number): Promise<User | null> {
-    try {
-      const response: AxiosResponse<User> = await axios.get(`${BASE_URL}/${userId}`);
-      return response.data; // Retorna o usuário se encontrado
+    async getUserById(userId: number): Promise<User | null> {
+      try {
+        const response: AxiosResponse<User> = await axios.get(`${BASE_URL}/${userId}`);
+        return response.data; // Retorna o usuário se encontrado
 
-    } catch (error: AxiosError | any) { // Especifica o tipo de erro como AxiosError ou qualquer outro tipo
-      if (error.response && error.response.status === 404) {
-        return null; // Retorna null se o usuário não existir
-      } else {
-        throw error; // Lança qualquer outro erro que ocorrer
-      }
-    }}
+      } catch (error: AxiosError | any) { 
+        if (error.response && error.response.status === 404) {
+          return null; // Retorna null se o usuário não existir
+        } else {
+          throw error; // Lança qualquer outro erro que ocorrer
+        }
+      }}
 
 
   async getAllUsers(): Promise<User[] | null> {

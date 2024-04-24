@@ -12,14 +12,20 @@ import { Corfundo } from './style';
 
 
 // Importe as imagens e atribua-as diretamente a uma variável
-const mascoteImage = require('../../assets/GrupoIcon.png');
+
+
 
 const reloadPage = () => {
-  Linking.openURL(''); // Qualquer URL vazia
+  Linking.openURL(''); 
 };
 
 const Home = () => {
   
+  const mascoteImage = require('../../assets/GrupoIcon.png');
+  const [NewId, setId] = useState<number>(0);
+  const grupoService = new GrupoService();
+  
+
   const [Grupos, setGrupos] = useState<Grupo[] | null>([]);
 
   const renderItem = ({ item, index }: { item: Grupo, index: number }) => (
@@ -35,7 +41,6 @@ const Home = () => {
   </ScrollView>
   );
 
-  const grupoService = new GrupoService();
   
   const navigation = useNavigation<StackTypes>();
   useEffect(() => {
@@ -57,7 +62,7 @@ const Home = () => {
     // Lógica para lidar com a edição do usuário
     navigation.navigate('Home2');
   };
-
+  
   const handleItemClick = (item) => {
     console.log(`Clicked on ${item}`);
     // Adicione o código para lidar com o clique do item aqui
@@ -67,6 +72,21 @@ const Home = () => {
    'Item 2', 
    'Item 3'
   ];
+
+  
+  // const handleExcluirGrupo = async (GrupoId: number) => { // Alteração do argumento para string
+  //   try {
+  //     const remove = await grupoService.removeGrupo(GrupoId); 
+  //     if (remove) {
+  //       alert('Usuário excluído com sucesso!');
+  //       navigation.navigate('Home');
+  //     } else {
+  //       alert('Não foi possível excluir o usuário.');
+  //     }
+  //   } catch (error) {
+  //     // Tratar erro de requisição ou outros erros
+  //   }
+  // };
 
 
   
@@ -81,7 +101,8 @@ const Home = () => {
     />
 
     <View style={styles.container}>
-       <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton> 
+       <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton>
+       {/* <CustomButton title='Remover grupo'  onPress={async () => { handleExcluirGrupo(NewId)}}></CustomButton> */}
         </View> 
         
       </View>
@@ -100,17 +121,17 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%', // Ajuste conforme necessário
-    maxWidth: 400, // Define uma largura máxima para o item, ajuste conforme necessário
-    marginTop: 50, // Adiciona margem ao topo
+    width: '100%', 
+    maxWidth: 400, 
+    marginTop: 50, 
   
   
   },
   container: {
     flex: 1,
-    justifyContent: 'center', // Centraliza verticalmente
-    alignItems: 'center', // Centraliza horizontalmente
-    paddingHorizontal: 20, // Ajuste o espaço lateral conforme necessário,
+    justifyContent: 'center', 
+    alignItems: 'center',     
+    paddingHorizontal: 20,    
     // marginTop: 50,
   },
   GrupoInfo: {
@@ -124,7 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     alignContent: 'center',
-    marginLeft: 10, // Adicionei um espaçamento à esquerda para separar a imagem do texto
+    marginLeft: 10, 
   
   },
   photo: {

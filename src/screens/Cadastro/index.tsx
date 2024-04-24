@@ -68,7 +68,7 @@ const Cadastro = () => {
       />
 
       <View style={styles.container}>
-       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario({ id: NewId, username: Newlogin, password: NewPassword,photo: ''})}></CustomButton>
+       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario({ id: NewId, username: Newlogin, password: NewPassword,photo: ''})}  ></CustomButton>
        </View>
     </div>
     </View>
