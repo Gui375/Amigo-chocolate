@@ -4,7 +4,7 @@ import theme from '../../styles/theme';
 export const ButtonApp = styled.TouchableOpacity`
   width: 30%;
   height: 40px;
-  border-radius: 8px;
+  border-radius: 14px;
   background-color: #5C3317;
   justify-content: center;
   align-items: center;
