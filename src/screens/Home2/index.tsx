@@ -23,13 +23,9 @@ const Home2 = () => {
     <View style={styles.item}>
       <View style={styles.userInfo}>
         <Image source={mascoteImage} style={styles.photo}   resizeMode="contain" />
-        <Text style={styles.userInfoText}>Id:</Text>
-        <Text style={styles.userInfoText}>{item.id}</Text>
-        <Text>  </Text>
         <Text style={styles.userInfoText}>{item.username}</Text>
-        
+        <CustomButton title='Remover' onPress={async () => { handleExcluirUser(item.id)}}></CustomButton>
       </View>
-
     </View>
   </ScrollView>
 
@@ -86,12 +82,7 @@ const Home2 = () => {
     />
 
   <View style={styles.container}>
-  <InputLogin
-     placeholder="Id do grupo"
-     onChangeText={setId}
-     value={NewId}
-    ></InputLogin>
-    <CustomButton title='Remover'  onPress={async () => { handleExcluirUser(NewId)}}></CustomButton>
+ 
     <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>
      <CustomButton  title ='Enviar convite' onPress={async () => { await navigation.navigate('Convite');}}></CustomButton>
       </View>
@@ -136,6 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignContent: 'center',
     marginLeft: 10,
+    marginRight: 15,
+
   },
   photo: {
     width: 80,

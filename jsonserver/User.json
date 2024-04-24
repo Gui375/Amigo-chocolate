@@ -1,12 +1,6 @@
 {
   "User": [
     {
-      "id": "2",
-      "username": "Usuario Teste",
-      "password": "456",
-      "photo": "teste.png"
-    },
-    {
       "id": "3",
       "username": "h1",
       "password": "123",
@@ -22,6 +16,12 @@
       "id": "5",
       "username": "Guilherme",
       "password": "Senha123",
+      "photo": ""
+    },
+    {
+      "id": "1",
+      "username": "Teste",
+      "password": "123",
       "photo": ""
     }
   ],
