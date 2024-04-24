@@ -9,35 +9,6 @@ class UserService {
         // Se necessário, adicione inicializações aqui
       }
 
-  // async addUser(user: User): Promise<boolean> {
-  //   try {
-  //   //  const response = await axios.post(`${BASE_URL}`, user);
-    
-  //   const formData = new FormData();
-  //   formData.append('id', user.id);
-  //   formData.append('username', user.username);
-  //   formData.append('password', user.password);
-
-  //   const responsePhoto = await fetch(user.photo);
-
-  //   const blob = await responsePhoto.blob();
-
-  //   formData.append('photo', blob, 'photo.jpg');
-
-  //   // const uploadResponse = await axios.post(BASE_URL+'addUser', formData, {
-  //     const uploadResponse = await axios.post(`${BASE_URL}`, formData, {
-  //       headers: {
-  //           'Content-Type': 'multipart/form-data',
-  //       },
-  //   });
-    
-  //     return uploadResponse.status === 201; // Retorna true se o usuário foi adicionado com sucesso
-    
-  //   } catch (error) {
-  //     console.error('Erro ao adicionar usuário:', error);
-  //     return false; // Retorna false em caso de erro
-  //   }
-  // }
   async removeUser(userId: number): Promise<boolean> {
     try {
       // Verifica se o usuário existe na API
