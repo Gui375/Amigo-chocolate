@@ -41,7 +41,7 @@ const Cadastro = () => {
         }
         
     } catch (error) {
-        // Tratar erro de requisição ou outros erros
+
     }
 };
 
@@ -50,7 +50,7 @@ const Cadastro = () => {
   return (
     <View style={styles.container}>
         <div style={styles.div}>
-        {/* <Text style={styles.title}>Login</Text> */}
+
         <h1 style={styles.title}>Cadastro</h1>
         <br />
         <br />

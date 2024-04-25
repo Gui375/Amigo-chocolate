@@ -32,7 +32,7 @@ const CriarGrupo = () => {
             alert('Não foi possivel gravar grupo')
           }
       } catch (error) {
-          // Tratar erro de requisição ou outros erros
+
       }
   };
      

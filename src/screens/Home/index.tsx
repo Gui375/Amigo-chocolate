@@ -11,7 +11,6 @@ import { Linking } from 'react-native';
 import { Corfundo } from './style';
 
 
-// Importe as imagens e atribua-as diretamente a uma variável
 
 
 
@@ -33,7 +32,7 @@ const Home = () => {
       <View style={styles.item}>
         <View>
           <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
-          {/* Adicione margem vertical ao redor do texto */}
+
           <Text style={[ { marginVertical: 10 , fontSize:15}]}>{item.nome}</Text>
         </View>
 
@@ -56,7 +55,7 @@ const Home = () => {
   useEffect(() => {
     const fetchGrupos= async () => {  
       try {
-        const fetchedGrupo = await grupoService.getAllGrupo(); // Chame o método getAllUsers
+        const fetchedGrupo = await grupoService.getAllGrupo(); 
         setGrupos(fetchedGrupo);
       } catch (error) {
         console.error('Erro ao buscar usuários:', error);
@@ -65,16 +64,16 @@ const Home = () => {
 
 
     fetchGrupos();
-  }, []); // Use um array vazio para garantir que useEffect seja chamado apenas uma vez
+  }, []); 
 
 
   const handleEdit = (pGrupoId: number) => {
-    // Lógica para lidar com a edição do usuário
+
     navigation.navigate('Home2');
   };
 
 
-  const handleExcluirUser = async (grupoId: number) => { // Alteração do argumento para string
+  const handleExcluirUser = async (grupoId: number) => { 
     try {
       const remove = await grupoService.removeGrupo(grupoId); 
       if (remove) {
@@ -84,14 +83,14 @@ const Home = () => {
         alert('Não foi possível excluir o usuário.');
       }
     } catch (error) {
-      // Tratar erro de requisição ou outros erros
+
     }
   };
 
 
   const handleItemClick = (item) => {
     console.log(`Clicked on ${item}`);
-    // Adicione o código para lidar com o clique do item aqui
+
   };
   const menuItems = [
   <TouchableOpacity onPress={reloadPage}>Logout</TouchableOpacity>,
@@ -100,19 +99,6 @@ const Home = () => {
   ];
 
   
-  // const handleExcluirGrupo = async (GrupoId: number) => { // Alteração do argumento para string
-  //   try {
-  //     const remove = await grupoService.removeGrupo(GrupoId); 
-  //     if (remove) {
-  //       alert('Usuário excluído com sucesso!');
-  //       navigation.navigate('Home');
-  //     } else {
-  //       alert('Não foi possível excluir o usuário.');
-  //     }
-  //   } catch (error) {
-  //     // Tratar erro de requisição ou outros erros
-  //   }
-  // };
 
 
   
@@ -158,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center', 
     alignItems: 'center',    
     paddingHorizontal: 20,    
-    // marginTop: 50,
+     marginTop: 50,
   },
   GrupoInfo: {
     flexDirection: 'row',

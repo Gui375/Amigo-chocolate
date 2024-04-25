@@ -36,7 +36,7 @@ const Login = () => {
         navigation.navigate('Home');
       } else {
         alert('Usuário e/ou senha inválidos');
-        //Alert.alert('Erro', 'Usuário e/ou senha inválidos');
+
       }
     };
   
