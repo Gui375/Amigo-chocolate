@@ -31,10 +31,10 @@ const Home = () => {
   const renderItem = ({ item, index }: { item: Grupo, index: number }) => (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.item}>
-        <View style={styles.GrupoInfo}>
+        <View>
           <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
           {/* Adicione margem vertical ao redor do texto */}
-          <Text style={[styles.GrupoInfoText, { marginVertical: 10 }]}>{item.nome}</Text>
+          <Text style={[ { marginVertical: 10 , fontSize:15}]}>{item.nome}</Text>
         </View>
 
         <CustomButton
@@ -140,36 +140,42 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   item: {
-    width: '80%',
-    padding: 10,
-    backgroundColor: 'rgba(92, 60, 23, 0.7)', // Cor preta com 50% de opacidade
-    borderRadius: 40,
-    marginBottom: 30,
-    marginTop: 30,
+    flexDirection: 'row',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: '#ccc',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    width: '100%', 
+    maxWidth: 400, 
+    marginTop: 50, 
+
+
   },
   container: {
     flex: 1,
     justifyContent: 'center', 
-    marginBottom: 30,
-    alignItems: 'center',     
+    alignItems: 'center',    
     paddingHorizontal: 20,    
-    
     // marginTop: 50,
   },
   GrupoInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomColor : 'black',  
-    borderTopColor: 'black'
-
+    borderBottomColor: 'black',
+    borderTopColor: 'black',
+    marginBottom: 10,
+    marginTop: 10,   
+    padding: 30
   },
   GrupoInfoText: {
     fontSize: 30,
     fontWeight: "bold",
     alignContent: 'center',
-    marginLeft: 10, 
-  
+    marginLeft: 10,
+    marginRight: 15,
+
   },
   photo: {
     width: 80,
