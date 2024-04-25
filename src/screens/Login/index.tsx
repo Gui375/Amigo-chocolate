@@ -14,6 +14,7 @@ const Login = () => {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [usernameError, setUsernameError] = useState(false);
+    const [Email,setNewEmail] = useState<string> ('')
   
     const userService = new UserService();
     

@@ -17,8 +17,9 @@ const Cadastro = () => {
   //Declaração de variaveis
   const [Newlogin, setNewLogin] = useState<string>('');
   const [NewId, setNewId] = useState<number>(0);
-  const [NewIdade, setNewIdade] = useState<string>('');
+  const [NewEmail, setNewEmail] = useState<string>('');
   const [NewPassword, setNewPassword] = useState<string>('');
+  const [NewConfPassword, setNewConfPassword] = useState<string>('');
   const [usernameError, setUsernameError] = useState(false);
 
   const userService = new UserService();
@@ -27,12 +28,18 @@ const Cadastro = () => {
     const userService = new UserService();
     try {
         const success = await userService.addUser(user);
-        if (success) {
-          alert('Usuário Cadastrado com sucesso!')
-           navigation.navigate('Login')
-        } else {
-          alert('Não foi possivel gravar usuário')
+        if (NewPassword === NewConfPassword){
+          if (success) {
+            alert('Usuário Cadastrado com sucesso!')
+             navigation.navigate('Login')
+          } else {
+            alert('Não foi possivel gravar usuário')
+          } 
         }
+        else{
+          alert('Senha divergente!')
+        }
+        
     } catch (error) {
         // Tratar erro de requisição ou outros erros
     }
@@ -55,9 +62,15 @@ const Cadastro = () => {
       />
       <TextInput
         style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Login"
+        placeholder="Usuário"
         onChangeText={setNewLogin}
         value={Newlogin}
+      />
+      <TextInput
+        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
+        placeholder="E-mail"
+        onChangeText={setNewEmail}
+        value={NewEmail}
       />
       <TextInput
         style={styles.input}
@@ -65,6 +78,13 @@ const Cadastro = () => {
         secureTextEntry={true}
         onChangeText={setNewPassword}
         value={NewPassword}
+      />
+      <TextInput
+        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
+        placeholder="Confirmar Senha!"
+        onChangeText={setNewConfPassword}
+        secureTextEntry={true}
+        value={NewConfPassword}
       />
 
       <View style={styles.container}>
@@ -112,7 +132,7 @@ const Cadastro = () => {
       height: 40, // Ajuste a altura conforme necessário
       borderColor: 'gray',
       borderWidth: 1,
-      borderRadius: 2,
+      borderRadius: 12,
       marginBottom: 10,
       paddingHorizontal: 10,
       color: '#000000',

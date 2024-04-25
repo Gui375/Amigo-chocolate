@@ -30,15 +30,25 @@ const Home = () => {
 
   const renderItem = ({ item, index }: { item: Grupo, index: number }) => (
     <ScrollView contentContainerStyle={styles.container}>
-    <View style={styles.item}>
-      <View style={styles.GrupoInfo}>
-        <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
-        <Text style={styles.GrupoInfoText}>{item.nome}</Text>
-      </View>
+      <View style={styles.item}>
+        <View style={styles.GrupoInfo}>
+          <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
+          {/* Adicione margem vertical ao redor do texto */}
+          <Text style={[styles.GrupoInfoText, { marginVertical: 10 }]}>{item.nome}</Text>
+        </View>
 
-      <CustomButton title='Editar' onPress={() => handleEdit(item.id)}></CustomButton>
-    </View>
-  </ScrollView>
+        <CustomButton
+          title='Editar'
+          onPress={() => handleEdit(item.id)}
+          style={{ marginVertical: 5 }}
+        />
+        <CustomButton
+          title='Remover'
+          onPress={async () => { handleExcluirUser(item.id)}}
+          style={{ marginVertical: 5 }}
+        />
+      </View>
+    </ScrollView>
   );
 
   
@@ -62,7 +72,23 @@ const Home = () => {
     // Lógica para lidar com a edição do usuário
     navigation.navigate('Home2');
   };
-  
+
+
+  const handleExcluirUser = async (grupoId: number) => { // Alteração do argumento para string
+    try {
+      const remove = await grupoService.removeGrupo(grupoId); 
+      if (remove) {
+        alert('Grupo excluído com sucesso!');
+        navigation.navigate('Home');
+      } else {
+        alert('Não foi possível excluir o usuário.');
+      }
+    } catch (error) {
+      // Tratar erro de requisição ou outros erros
+    }
+  };
+
+
   const handleItemClick = (item) => {
     console.log(`Clicked on ${item}`);
     // Adicione o código para lidar com o clique do item aqui
@@ -93,7 +119,7 @@ const Home = () => {
   return (
     <ScrollView>
       <View>
-      <VerticalMenu items={menuItems} onItemClick={handleItemClick} />
+      {/* <VerticalMenu items={menuItems} onItemClick={handleItemClick} /> */}
      <FlatList
       data={Grupos}
       renderItem={renderItem}
@@ -101,7 +127,7 @@ const Home = () => {
     />
 
     <View style={styles.container}>
-       <CustomButton  title ='Cadastrar novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton>
+       <CustomButton  title ='Novo Grupo' onPress={async () => { await navigation.navigate('CriarGrupo');}}></CustomButton>
        {/* <CustomButton title='Remover grupo'  onPress={async () => { handleExcluirGrupo(NewId)}}></CustomButton> */}
         </View> 
         
@@ -114,24 +140,21 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   item: {
-    flexDirection: 'row',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: '#ccc',
-    justifyContent: 'space-between',
+    width: '80%',
+    padding: 10,
+    backgroundColor: 'rgba(92, 60, 23, 0.7)', // Cor preta com 50% de opacidade
+    borderRadius: 40,
+    marginBottom: 30,
+    marginTop: 30,
     alignItems: 'center',
-    width: '100%', 
-    maxWidth: 400, 
-    marginTop: 50, 
-  
-  
   },
   container: {
     flex: 1,
     justifyContent: 'center', 
+    marginBottom: 30,
     alignItems: 'center',     
     paddingHorizontal: 20,    
+    
     // marginTop: 50,
   },
   GrupoInfo: {

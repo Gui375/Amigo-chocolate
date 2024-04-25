@@ -15,6 +15,6 @@ export const IconLogin = styled.Image`
 width: 180;
 height: 180;
 margin-bottom: 20px;
-border-radius: 48px;
+border-radius:60px;
 `;
 

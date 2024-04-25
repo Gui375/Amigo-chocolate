@@ -16,6 +16,7 @@ const CriarGrupo = () => {
     const navigation = useNavigation<StackTypes>();
     const [NewId, setNewId] = useState<number>(0);
     const [NewNome, setNewNome] = useState<string>('');
+    const [NewPreco, setNewPreco] = useState<string>('');
     const [NewQtd, setNewQtd] = useState<number>(0)
     const grupoService = new GrupoService();
   
@@ -53,6 +54,11 @@ const CriarGrupo = () => {
           placeholder="Quantas pessoas estão no grupo?"
           onChangeText={setNewQtd}
           value={NewQtd}
+        />
+        <InputLogin
+          placeholder="Preço minimo?"
+          onChangeText={setNewPreco}
+          value={NewPreco}
         />
         <CustomButton title='Cadastrar Grupo' onPress={() => handleCadastroGrupo({ id: NewId, nome: NewNome, quantidade: NewQtd,photo: ''})} ></CustomButton>
         <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>
