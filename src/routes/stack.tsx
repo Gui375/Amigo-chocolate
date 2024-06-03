@@ -10,6 +10,7 @@ import Cadastro from '../screens/Cadastro';
 import FGpassword from '../screens/FGpassword';
 import CriarGrupo from '../screens/CriarGrupo/Index';
 import Convite from '../screens/Convite';
+import { Splash } from '../screens/Splash';
 
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ type StackNavigation = {
     FGpassword : undefined
     CriarGrupo : undefined
     Convite : undefined
+    Splash : undefined
 }
 
 export type RootStackParamList = {
@@ -35,6 +37,7 @@ export type RootStackParamList = {
     FGpassword : undefined
     CriarGrupo : undefined
     Convite : undefined
+    Splash : undefined
 
 
 };
@@ -48,6 +51,7 @@ export default function StackComponent(){
     return (
         <NavigationContainer>
             <Stack.Navigator>
+                {/* <Stack.Screen  name="Splash" component={Splash}   options={{headerShown: false }}  /> Não sei porque não entra na splash Screen */}
                 <Stack.Screen  name="Login" component={Login}   options={{headerShown: false }}  />
                 <Stack.Screen  name="Home" component={Home} options={{headerShown: false }} />
                 <Stack.Screen  name="Home2" component={Home2} options={{headerShown: false }} />

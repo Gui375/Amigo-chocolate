@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
 
-const FontTeste = require('../../assets/DancingScript-VariableFont_wght.ttf');
 
 
 export const Div = styled.View`
