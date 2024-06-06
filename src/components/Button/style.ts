@@ -16,5 +16,5 @@ export const ButtonApp = styled.TouchableOpacity`
 
 export const Title = styled.Text`
     color: #fff;
-    fontSize: 16,
+    fontSize: 16;
 `
