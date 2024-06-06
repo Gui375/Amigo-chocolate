@@ -51,7 +51,7 @@ export default function StackComponent(){
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {/* <Stack.Screen  name="Splash" component={Splash}   options={{headerShown: false }}  /> Não sei porque não entra na splash Screen */}
+                <Stack.Screen  name="Splash" component={Splash}   options={{headerShown: false }}  />
                 <Stack.Screen  name="Login" component={Login}   options={{headerShown: false }}  />
                 <Stack.Screen  name="Home" component={Home} options={{headerShown: false }} />
                 <Stack.Screen  name="Home2" component={Home2} options={{headerShown: false }} />

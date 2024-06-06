@@ -10,11 +10,11 @@ export const ButtonApp = styled.TouchableOpacity`
   align-items: center;
   border-width: 1px;
   border-color: #5C3317;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 `;
 
 
 export const Title = styled.Text`
     color: #fff;
-    fontSize: 16;
+    fontSize: 13;
 `
