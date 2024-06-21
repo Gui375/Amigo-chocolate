@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Grupo, INewGrupo } from '../../types/types';
 
-const BASE_URL = 'http://localhost:3000/Grupo';//'https://localhost:7217/api/User/'
+const BASE_URL = 'http://localhost:3000/grupos';//'https://localhost:7217/api/User/'
 
 class GrupoService {
 
@@ -9,8 +9,9 @@ class GrupoService {
         // Se necessário, adicione inicializações aqui
       }
 
+      
 
-      async removeGrupo(GrupoId: number): Promise<boolean> {
+      async removeGrupo(GrupoId: string): Promise<boolean> {
         try {
           // Verifica se o usuário existe na API
           const existingGrupo = await this.getGrupoById(GrupoId);
@@ -27,7 +28,7 @@ class GrupoService {
           console.error('Erro ao excluir Grupo:', error);
           return false; // Retorna false em caso de erro
         }
-      }
+      } 
 
 
 
@@ -35,27 +36,22 @@ class GrupoService {
       async addGrupo(grupo: Grupo): Promise<boolean> {
         try {
           // Verifica se o ID já existe na API
-          const existingUser = await this.getGrupoById(grupo.id);
-          if (existingUser) {
-            console.error('Erro ao adicionar Grupo: ID já existe');
-            return false; // Retorna false se o ID já existir
-          }
     
           // Se o ID não existe, adiciona o usuário
           const response = await axios.post(BASE_URL, grupo);
           return response.status === 201; // Retorna true se o usuário foi adicionado com sucesso
     
         } catch (error) {
-          console.error('Erro ao adicionar Grupo:', error);
+          console.error('Erro ao adicionar grupo:', error);
           return false; // Retorna false em caso de erro
         }
       }
 
 
 
-  async validaGrupo(nome: string, quantidade: string): Promise<boolean> {
+  async validaGrupo(nome: string, quantidadePessoas: number, valor: number): Promise<boolean> {
     try {
-        const response: AxiosResponse<Grupo[]> = await axios.get(`${BASE_URL}?nome=${nome}&password=${quantidade}`);
+        const response: AxiosResponse<Grupo[]> = await axios.get(`${BASE_URL}?nome=${nome}&quantidadePessoas=${quantidadePessoas}&valor=${valor}`);
         if (response.data.length === 0) {
           return false;
         }
@@ -67,7 +63,7 @@ class GrupoService {
     }
   }
 
-  async getGrupoById(grupoId: number): Promise<Grupo | null> {
+  async getGrupoById(grupoId: string): Promise<Grupo | null> {
     try {
       const response: AxiosResponse<Grupo> = await axios.get(`${BASE_URL}/${grupoId}`);
       return response.data; // Retorna o usuário se encontrado
@@ -80,16 +76,15 @@ class GrupoService {
       }
     }}
 
-  async getAllGrupo(): Promise<Grupo[] | null> {
+ async getAllGrupo(): Promise<Grupo[] | null> {
     try {
-      const response: AxiosResponse<Grupo[]> = await axios.get(`${BASE_URL}`);
-      return response.data;
-      
+      const response: AxiosResponse<{ data: Grupo[] }> = await axios.get(`${BASE_URL}`);
+      console.log('Response data:', response.data); // Adicione este log para ver os dados retornados
+      return response.data.data; // Ajuste aqui para retornar a propriedade 'data' da resposta
     } catch (error) {
-        console.error('Erro ao buscar grupo pelo ID:', error);
-        return null;
+      console.error('Erro ao buscar grupos:', error);
+      return null;
     }
-
   }
 
 }

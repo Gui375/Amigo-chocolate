@@ -16,36 +16,45 @@ const Cadastro = () => {
    
   //Declaração de variaveis
   const [Newlogin, setNewLogin] = useState<string>('');
-  const [NewId, setNewId] = useState<number>(0);
   const [NewEmail, setNewEmail] = useState<string>('');
   const [NewPassword, setNewPassword] = useState<string>('');
   const [NewConfPassword, setNewConfPassword] = useState<string>('');
   const [usernameError, setUsernameError] = useState(false);
 
   const userService = new UserService();
-
- const handleCadastroUsuario = async (user: User) => {
+const teste = async() =>{
+console.log(NovoUsuario)
+}
+  const handleCadastroUsuario = async (usuario: User) => {
     const userService = new UserService();
     try {
-        const success = await userService.addUser(user);
-        if (NewPassword === NewConfPassword){
-          if (success) {
-            alert('Usuário Cadastrado com sucesso!')
-             navigation.navigate('Login')
-          } else {
-            alert('Não foi possivel gravar usuário')
-          } 
+        const success = await userService.addUser(usuario);
+        if (Newlogin == '' || NewEmail == '' || NewPassword =='') {
+          alert('Erro ao criar usuário!')
         }
-        else{
-          alert('Senha divergente!')
+        if (success) {
+          alert('Usuario Cadastrado com sucesso!')
+          navigation.navigate('Login')
+        } else{
+          alert('Erro ao criar Usuário!')
+            NovoUsuario
+          
         }
+        
         
     } catch (error) {
 
     }
 };
 
+const NovoUsuario : User={
+  nome: Newlogin,
+  email: NewEmail,
+  senha: NewPassword
+}
 
+
+console.log(NovoUsuario)
 //O que será mostrado no site
   return (
     <View style={styles.container}>
@@ -54,12 +63,7 @@ const Cadastro = () => {
         <h1 style={styles.title}>Cadastro</h1>
         <br />
         <br />
-      <TextInput
-        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Id"
-        onChangeText={setNewId}
-        value={NewId}
-      />
+  
       <TextInput
         style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
         placeholder="Usuário"
@@ -79,16 +83,16 @@ const Cadastro = () => {
         onChangeText={setNewPassword}
         value={NewPassword}
       />
-      <TextInput
+      {/* <TextInput
         style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
         placeholder="Confirmar Senha!"
         onChangeText={setNewConfPassword}
         secureTextEntry={true}
         value={NewConfPassword}
-      />
+      /> */}
 
       <View style={styles.container}>
-       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario({ id: NewId, username: Newlogin, password: NewPassword,photo: ''})}  ></CustomButton>
+       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario(NovoUsuario)}  ></CustomButton>
        </View>
     </div>
     </View>

@@ -7,6 +7,9 @@ import { InputLogin } from '../../components/InputLogin/style';
 import PassWordInput from '../../components/Password';
 import { ContainerLogin , IconLogin} from './style';
 import MyTitle from '../../components/MyTitle';
+import TextLink from '../../components/TextoComLink';
+import { View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const Login = () => {
   const mascoteImage = require('../../assets/chocolatee.png');
@@ -55,12 +58,24 @@ const Login = () => {
           onChangeText={setPassword}
           value={password}
         />
-        <CustomButton title='Esqueci a senha' onPress={async () => { await navigation.navigate('FGpassword');}}></CustomButton>
-        <CustomButton title='Cadastrar' onPress={async () => { await navigation.navigate('Cadastro');}}></CustomButton>
+        {/* <CustomButton title='Esqueci a senha' onPress={async () => { await navigation.navigate('FGpassword');}}></CustomButton> */}
+        {/* <CustomButton title='Cadastrar' onPress={async () => { await navigation.navigate('Cadastro');}}></CustomButton> */}
         <CustomButton title='Entrar' onPress={handleLogin}></CustomButton>
+        <View style={styles.container}>
+        <TextLink textoTitulo='Esqueci a senha' onPress={async () => { await navigation.navigate('FGpassword');}}></TextLink>
+        <TextLink textoTitulo='Cadastrar' onPress={async () => { await navigation.navigate('Cadastro');}}></TextLink>
+        </View>
+
       </ContainerLogin>
     );
   };
   
-
+  const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row', // Adicione a propriedade flexDirection para alinhar os itens horizontalmente
+      justifyContent: 'center', // Alinha os itens horizontalmente no centro
+      alignItems: 'center', // Alinha os itens verticalmente no centro
+    },
+  });
+  
 export default Login;

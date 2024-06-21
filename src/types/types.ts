@@ -1,17 +1,19 @@
 import { ImageSourcePropType } from 'react-native';
 
 export interface User {
-    id: number;
-    username: string;
-    password: string;
+    id?: string;
+    nome: string;
+    email: string;
+    senha: string;
     photo?: string;
   }
   
 
   export interface Grupo {
-    id: number;
+    id?: string;
     nome: string;
-    quantidade: number;
+    quantidadePessoas: number;
+    valor: number;
     photo?: string;
     //Usuários[array de usuários]
     //interface para busca

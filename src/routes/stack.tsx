@@ -20,7 +20,7 @@ type StackNavigation = {
     Home2 : undefined;
     Login : undefined;
     // Details: { userId : number | undefined};
-    Details: { GrupoId : number | undefined};
+    Details: undefined;//{ GrupoId : string | undefined};
     Cadastro : undefined;
     FGpassword : undefined
     CriarGrupo : undefined
@@ -32,7 +32,7 @@ export type RootStackParamList = {
     Home: undefined;
     Home2: undefined;
     Login: undefined;
-    Details: { userId: number};
+    Details: undefined;//{ userId: string};
     Cadastro : undefined;
     FGpassword : undefined
     CriarGrupo : undefined
@@ -51,7 +51,7 @@ export default function StackComponent(){
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen  name="Splash" component={Splash}   options={{headerShown: false }}  />
+                {/* <Stack.Screen  name="Splash" component={Splash}   options={{headerShown: false }}  /> */}
                 <Stack.Screen  name="Login" component={Login}   options={{headerShown: false }}  />
                 <Stack.Screen  name="Home" component={Home} options={{headerShown: false }} />
                 <Stack.Screen  name="Home2" component={Home2} options={{headerShown: false }} />
