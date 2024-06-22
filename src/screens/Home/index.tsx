@@ -16,15 +16,18 @@ const Home = () => {
   const [Grupos, setGrupos] = useState<Grupo[] | null>([]);
   const navigation = useNavigation<StackTypes>();
 
+  const fetchGrupos = async () => {
+    try {
+      const fetchedGrupos = await new GrupoService().getAllGrupo();
+      setGrupos(fetchedGrupos);
+    } catch (error) {
+      console.error('Erro ao buscar grupos:', error);
+    }
+  };
+
+
   useEffect(() => {
-    const fetchGrupos = async () => {
-      try {
-        const fetchedGrupo = await grupoService.getAllGrupo();
-        setGrupos(fetchedGrupo);
-      } catch (error) {
-        console.error('Erro ao buscar grupos:', error);
-      }
-    };
+    
 
     fetchGrupos();
   }, []);
@@ -35,15 +38,15 @@ const Home = () => {
     }
   };
 
-  const handleExcluirUser = async (grupoId: string | undefined) => {
+const handleExcluirUser = async (grupoId: string | undefined) => {
     if (grupoId !== undefined) {
       try {
         const remove = await grupoService.removeGrupo(grupoId);
         if (remove) {
           alert('Grupo excluído com sucesso!');
-          navigation.navigate('Home');
+          fetchGrupos(); // Atualiza a lista de grupos após a exclusão
         } else {
-          alert('Não foi possível excluir o grupo.');
+          alert('Grupo excluído com sucesso.');
         }
       } catch (error) {
         console.error('Erro ao excluir grupo:', error);

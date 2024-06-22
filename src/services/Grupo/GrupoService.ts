@@ -11,25 +11,24 @@ class GrupoService {
 
       
 
-      async removeGrupo(GrupoId: string): Promise<boolean> {
+      async removeGrupo(grupoId: string): Promise<boolean> {
         try {
-          // Verifica se o usuário existe na API
-          const existingGrupo = await this.getGrupoById(GrupoId);
+          // Verifica se o grupo existe na API
+          const existingGrupo = await this.getGrupoById(grupoId);
           if (!existingGrupo) {
             console.error('Erro ao excluir Grupo: Grupo não encontrado');
-            return false; // Retorna false se o usuário não for encontrado
+            return false; // Retorna false se o grupo não for encontrado
           }
-      
-          // Se o usuário existe, faz a requisição para excluí-lo
-          const response = await axios.delete(`${BASE_URL}/${GrupoId}`);
-          return response.status === 200; // Retorna true se o usuário foi excluído com sucesso
-      
+    
+          // Se o grupo existe, faz a requisição para excluí-lo
+          const response = await axios.delete(`${BASE_URL}/${grupoId}`);
+          return response.status === 200; // Retorna true se o grupo foi excluído com sucesso
+    
         } catch (error) {
           console.error('Erro ao excluir Grupo:', error);
           return false; // Retorna false em caso de erro
         }
-      } 
-
+      }
 
 
 
@@ -66,16 +65,16 @@ class GrupoService {
   async getGrupoById(grupoId: string): Promise<Grupo | null> {
     try {
       const response: AxiosResponse<Grupo> = await axios.get(`${BASE_URL}/${grupoId}`);
-      return response.data; // Retorna o usuário se encontrado
+      return response.data; // Retorna o grupo se encontrado
 
     } catch (error: AxiosError | any) { 
       if (error.response && error.response.status === 404) {
-        return null; // Retorna null se o usuário não existir
+        return null; // Retorna null se o grupo não existir
       } else {
         throw error; // Lança qualquer outro erro que ocorrer
       }
-    }}
-
+    }
+  }
  async getAllGrupo(): Promise<Grupo[] | null> {
     try {
       const response: AxiosResponse<{ data: Grupo[] }> = await axios.get(`${BASE_URL}`);

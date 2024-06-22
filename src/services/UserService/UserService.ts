@@ -47,12 +47,17 @@ class UserService {
 
   async validateUser(nome: string, senha: string): Promise<boolean> {
     try {
-        const response: AxiosResponse<User[]> = await axios.get(`${BASE_URL}?nome=${nome}&senha=${senha}`);
-        if (response.data.length === 0) {
-          return false;
-        }
-  
-        return response.status === 200; 
+      // Ajuste a URL para incluir os parâmetros de rota
+      const response: AxiosResponse<User[]> = await axios.get(`${BASE_URL}/${nome}/${senha}`);
+      
+      console.log(response);
+      
+      // Verifica se a resposta contém dados de usuário
+      if (response.data.length === 0) {
+        return false;
+      } else {
+        return response.status === 200;
+      }
     } catch (error) {
       console.error('Erro ao validar usuário:', error);
       return false; // Retorna false em caso de erro

@@ -9,9 +9,10 @@ import { ContainerLogin } from './style';
 import {INewGrupo} from '../../types/types'
 import GrupoService  from '../../services/Grupo/GrupoService';
 import { Grupo } from '../../types/types';
+import MyTitle from '../../components/MyTitle';
 
 const CriarGrupo = () => {
-   
+
     const [NewGrupo, setNewGrupo] = useState<INewGrupo>({ nome: '', quantidade: '0' });
     const navigation = useNavigation<StackTypes>();
     const [NewId, setNewId] = useState<number>();
@@ -19,7 +20,7 @@ const CriarGrupo = () => {
     const [NewPreco, setNewPreco] = useState<number>(0);
     const [NewQtd, setNewQtd] = useState<number>(0)
     const grupoService = new GrupoService();
-  
+
 
     const handleCadastroGrupo = async (grupo: Grupo) => {
       const grupoService = new GrupoService();
@@ -27,7 +28,7 @@ const CriarGrupo = () => {
           const success = await grupoService.addGrupo(grupo);
           if (success) {
             alert('Grupo Cadastrado com sucesso!')
-             navigation.navigate('Home')  
+             navigation.navigate('Home')
           } else {
             alert('Não foi possivel gravar grupo')
           }
@@ -40,31 +41,33 @@ const CriarGrupo = () => {
       quantidadePessoas: NewQtd,
       valor: NewPreco
      }
-  
+
     return (
       <ContainerLogin>
-        <InputLogin  
-          placeholder="Nome Grupo"
+        <Text style={{ fontSize:16, textAlign: 'left',padding:12}}>Nome do grupo</Text>
+        <InputLogin
+          placeholder=""
           onChangeText={setNewNome}
           value={NewNome}
         />
-        
+        <Text style={{ fontSize:16, textAlign: 'left',padding:12}}>Quantas pessoas estão no grupo?</Text> 
         <InputLogin
-          placeholder="Quantas pessoas estão no grupo?"
+          placeholder=""
           onChangeText={setNewQtd}
           value={NewQtd}
         />
+        <Text style={{ fontSize:16, textAlign: 'left',padding:12}}>Preço minimo</Text> 
         <InputLogin
-          placeholder="Preço minimo ?"
+          placeholder=""
           onChangeText={setNewPreco}
           value={NewPreco}
         />
         <CustomButton title='Cadastrar Grupo' onPress={() => handleCadastroGrupo(NovoGrupo)} ></CustomButton>
         <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>
-        
+
       </ContainerLogin>
     );
   };
-  
+
 
 export default CriarGrupo;

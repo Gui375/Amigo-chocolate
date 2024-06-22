@@ -31,14 +31,18 @@ console.log(NovoUsuario)
         const success = await userService.addUser(usuario);
         if (Newlogin == '' || NewEmail == '' || NewPassword =='') {
           alert('Erro ao criar usuário!')
+          return false
+        }
+        if (NewPassword != NewConfPassword) {
+          alert('Senha divergente!')
+          return false
         }
         if (success) {
           alert('Usuario Cadastrado com sucesso!')
           navigation.navigate('Login')
         } else{
-          alert('Erro ao criar Usuário!')
-            NovoUsuario
-          
+          alert('Erro ao criar Usuário!')         
+          return false
         }
         
         
@@ -83,13 +87,13 @@ console.log(NovoUsuario)
         onChangeText={setNewPassword}
         value={NewPassword}
       />
-      {/* <TextInput
-        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Confirmar Senha!"
-        onChangeText={setNewConfPassword}
+      <TextInput
+        style={styles.input}
+        placeholder="Confirmar Senha"
         secureTextEntry={true}
+        onChangeText={setNewConfPassword}
         value={NewConfPassword}
-      /> */}
+      />
 
       <View style={styles.container}>
        <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario(NovoUsuario)}  ></CustomButton>
