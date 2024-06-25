@@ -56,7 +56,7 @@ const FGpassword = () => {
         />
         
         <PassWordInput
-          placeholder="Senha"
+          placeholder="Nova Senha"
           onChangeText={setNewPassword}
           value={NewPassword}
         />

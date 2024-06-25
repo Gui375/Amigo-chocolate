@@ -64,6 +64,20 @@ class UserService {
     }
   }
 
+
+  async getUserByGroup(userId: string): Promise<User | null> {
+    try {
+      const response: AxiosResponse<User> = await axios.get(`${BASE_URL}/${userId}`);
+      return response.data; // Retorna o usuário se encontrado
+
+    } catch (error: AxiosError | any) { 
+      if (error.response && error.response.status === 404) {
+        return null; // Retorna null se o usuário não existir
+      } else {
+        throw error; // Lança qualquer outro erro que ocorrer
+      }
+    }}
+
   
   
     async getUserById(userId: string): Promise<User | null> {

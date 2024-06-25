@@ -10,6 +10,8 @@ import {INewGrupo} from '../../types/types'
 import GrupoService  from '../../services/Grupo/GrupoService';
 import { Grupo } from '../../types/types';
 import MyTitle from '../../components/MyTitle';
+import NovoUSgrupoService from '../../services/usuarioGrupo/Usuario_No_Grupo';
+import { StyledInstance } from 'styled-components';
 
 const CriarGrupo = () => {
 
@@ -20,6 +22,7 @@ const CriarGrupo = () => {
     const [NewPreco, setNewPreco] = useState<number>(0);
     const [NewQtd, setNewQtd] = useState<number>(0)
     const grupoService = new GrupoService();
+    const novoUsGrup = new NovoUSgrupoService();
 
 
     const handleCadastroGrupo = async (grupo: Grupo) => {
@@ -36,6 +39,11 @@ const CriarGrupo = () => {
 
       }
   };
+
+
+
+
+
      const NovoGrupo: Grupo ={
       nome: NewNome,
       quantidadePessoas: NewQtd,

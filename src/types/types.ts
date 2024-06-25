@@ -1,3 +1,4 @@
+import { getExpoGoProjectConfig } from 'expo';
 import { ImageSourcePropType } from 'react-native';
 
 export interface User {
@@ -20,10 +21,15 @@ export interface User {
   }
 
   export interface INewGrupo {
-    
     nome: string;
     quantidade: string;
     photo?: string;
     //Usuários[array de usuários]
     //Cadastro de Grupo
+  }
+
+  export interface novoUSgrupo{
+    idGrupo: string
+    id_usuario: string
+    ADM: boolean
   }
