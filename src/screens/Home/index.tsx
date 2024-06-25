@@ -6,9 +6,9 @@ import GrupoService from '../../services/Grupo/GrupoService';
 import { Grupo } from '../../types/types';
 import CustomButton from '../../components/Button';
 
-const reloadPage = () => {
-  Linking.openURL('');
-};
+  const reloadPage = () => {
+    Linking.openURL('');
+  };
 
 const Home = () => {
   const mascoteImage = require('../../assets/GrupoIcon.png');
@@ -25,20 +25,18 @@ const Home = () => {
     }
   };
 
-
   useEffect(() => {
-    
-
     fetchGrupos();
   }, []);
 
-  const handleEdit = (pGrupoId: string | undefined) => {
-    if (pGrupoId !== undefined) {
-      navigation.navigate('Home2');
+  const handleEdit = (grupoId: string | undefined) => {
+    if (grupoId !== undefined) {
+      navigation.navigate('Home2', { id_grupo_desejado: grupoId })
+       // Passa o ID do grupo como parâmetro para Home2
     }
   };
 
-const handleExcluirUser = async (grupoId: string | undefined) => {
+  const handleExcluirUser = async (grupoId: string | undefined) => {
     if (grupoId !== undefined) {
       try {
         const remove = await grupoService.removeGrupo(grupoId);
@@ -47,6 +45,7 @@ const handleExcluirUser = async (grupoId: string | undefined) => {
           fetchGrupos(); // Atualiza a lista de grupos após a exclusão
         } else {
           alert('Grupo excluído com sucesso.');
+          
         }
       } catch (error) {
         console.error('Erro ao excluir grupo:', error);
@@ -77,24 +76,13 @@ const handleExcluirUser = async (grupoId: string | undefined) => {
     </View>
   );
 
-  const handleItemClick = (item: Grupo) => {
-    console.log(`Clicked on ${item.nome}`);
-  };
-
-  const menuItems = [
-    <TouchableOpacity onPress={reloadPage}>Logout</TouchableOpacity>,
-    'Item 2',
-    'Item 3'
-  ];
-
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>
-        {/* <VerticalMenu items={menuItems} onItemClick={handleItemClick} /> */}
         <FlatList
           data={Grupos}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()} // Convertendo para string para keyExtractor
+          keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.flatListContent}
         />
         <View style={styles.buttonContainer}>
@@ -132,8 +120,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 500,  // Alterado para ocupar 90% da largura disponível
-    maxWidth: 600, // Ajustado para um máximo de 600
+    width: 500,
+    maxWidth: 600,
     marginTop: 50,
   },
   itemContent: {

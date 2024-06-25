@@ -1,92 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import { StackTypes } from '../../routes/stack';
-import { useNavigation } from '@react-navigation/native';
-import { FlatList, Text, View, Image, StyleSheet, ImageSourcePropType, TouchableOpacity, ScrollView } from 'react-native';
-import UserService   from '../../services/UserService/UserService';
-import {User} from '../../types/types'
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { FlatList, Text, View, Image, StyleSheet, ScrollView } from 'react-native';
+import UserService from '../../services/UserService/UserService';
+import { User } from '../../types/types';
 import CustomButton from '../../components/Button';
-import { InputLogin } from '../../components/InputLogin/style';
-
-
-// Importe as imagens e atribua-as diretamente a uma variável
-
 
 const Home2 = () => {
-  const [NewId, setId] = useState<number>(0);
+  const [users, setUsers] = useState<User[] | null>([]);
   const userService = new UserService();
   const mascoteImage = require('../../assets/Usuario.png');
+  const navigation = useNavigation<StackTypes>();
+  const route = useRoute();
 
-  const [users, setUsers] = useState<User[] | null>([]);
+  const { id_grupo_desejado } = route.params as { id_grupo_desejado: string };
+
+  useEffect(() => {
+    const fetchUsersByGroup = async () => {
+      try {
+        const fetchedUsers = await userService.getUsersByGroupId(id_grupo_desejado);
+        setUsers(fetchedUsers);
+      } catch (error) {
+        console.error('Erro ao buscar usuários por ID de grupo:', error);
+      }
+    };
+
+    fetchUsersByGroup();
+  }, [id_grupo_desejado]);
 
   const renderItem = ({ item, index }: { item: User, index: number }) => (
     <ScrollView contentContainerStyle={styles.container}>
-    <View style={styles.item}>
-      <View style={styles.userInfo}>
-        <Image source={mascoteImage} style={styles.photo}   resizeMode="contain" />
-        <Text style={styles.userInfoText}>{item.username}</Text>
-        <CustomButton title='Remover' onPress={async () => { handleExcluirUser(item.id)}}></CustomButton>
+      <View style={styles.item}>
+        <View style={styles.userInfo}>
+          <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
+          <Text style={styles.userInfoText}>{item.username}</Text>
+          <CustomButton title='Remover' onPress={async () => { handleExcluirUser(item.id) }}></CustomButton>
+        </View>
       </View>
-    </View>
-  </ScrollView>
-
+    </ScrollView>
   );
 
-  const handleExcluirUser = async (userId: number) => { // Alteração do argumento para string
+  const handleExcluirUser = async (userId: string) => {
     try {
-      const remove = await userService.removeUser(userId); 
+      const remove = await userService.removeUser(userId);
       if (remove) {
         alert('Usuário excluído com sucesso!');
-        navigation.navigate('Home2');
+        navigation.navigate('Home2', { id_grupo_desejado }); // Navega de volta para Home2 com o mesmo ID do grupo
       } else {
         alert('Não foi possível excluir o usuário.');
       }
     } catch (error) {
-      // Tratar erro de requisição ou outros erros
+      console.error('Erro ao excluir usuário:', error);
     }
   };
 
-
-
-
-
-
-
-  const navigation = useNavigation<StackTypes>();
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const fetchedUsers = await userService.getAllUsers(); // Chame o método getAllUsers
-        setUsers(fetchedUsers);
-      } catch (error) {
-        console.error('Erro ao buscar usuários:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []); // Use um array vazio para garantir que useEffect seja chamado apenas uma vez
-
-
-  // const handleEdit = (puserId: number) => {
-  //   // Lógica para lidar com a edição do usuário
-  //   navigation.navigate('Details', {userId : puserId});
-  // };
-
-
   return (
     <ScrollView>
-     <View>
-    <FlatList
-      data={users}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
+      <FlatList
+        data={users}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
 
-  <View style={styles.container}>
- 
-    <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home');}}></CustomButton>
-     <CustomButton  title ='Enviar convite' onPress={async () => { await navigation.navigate('Convite');}}></CustomButton>
+      <View style={styles.container}>
+        <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home'); }}></CustomButton>
+        <CustomButton title='Enviar convite' onPress={async () => { await navigation.navigate('Convite'); }}></CustomButton>
       </View>
-    </View>
     </ScrollView>
   );
 }
@@ -100,18 +79,15 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%', 
-    maxWidth: 400, 
-    marginTop: 50, 
-
-
+    width: '100%',
+    maxWidth: 400,
+    marginTop: 50,
   },
   container: {
     flex: 1,
-    justifyContent: 'center', 
-    alignItems: 'center',    
-    paddingHorizontal: 20,    
-    // marginTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   userInfo: {
     flexDirection: 'row',
@@ -119,7 +95,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     borderTopColor: 'black',
     marginBottom: 10,
-    marginTop: 10,   
+    marginTop: 10,
     padding: 30
   },
   userInfoText: {
@@ -128,22 +104,12 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     marginLeft: 10,
     marginRight: 15,
-
   },
   photo: {
     width: 80,
     height: 80,
     borderRadius: 40,
-
   },
-  editButton: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-    fontSize: 16,
-  },
-  footer:{
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
 });
+
 export default Home2;

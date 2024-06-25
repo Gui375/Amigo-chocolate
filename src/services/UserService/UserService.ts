@@ -2,6 +2,8 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 import { User } from '../../types/types';
 
 const BASE_URL = 'http://localhost:3000/usuarios';//'https://localhost:7217/api/User/'
+const BASE_URL_UsGr = 'http://localhost:3000/novoUSgrupo';//'https://localhost:7217/api/User/'
+
 
 class UserService {
 
@@ -29,7 +31,15 @@ class UserService {
   }
 
 
-
+  async getUsersByGroupId(groupId: string): Promise<User[] | null> {
+    try {
+      const response: AxiosResponse<User[]> = await axios.get(`${BASE_URL_UsGr}/${groupId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao buscar usuários por ID de grupo:', error);
+      return null;
+    }
+  }
 
   async addUser(usuario: User): Promise<boolean> {
     try {
