@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StackTypes } from '../../routes/stack';
 import { useNavigation } from '@react-navigation/native';
-import { FlatList, Text, View, Image, StyleSheet, TouchableOpacity, ScrollView, Linking } from 'react-native';
+import { Text, View, Image, StyleSheet, ScrollView, Linking } from 'react-native';
 import GrupoService from '../../services/Grupo/GrupoService';
 import { Grupo } from '../../types/types';
 import CustomButton from '../../components/Button';
+import Card from '../../components/CardGroup';
 
-  const reloadPage = () => {
-    Linking.openURL('');
-  };
+const reloadPage = () => {
+  Linking.openURL('');
+};
 
 const Home = () => {
   const mascoteImage = require('../../assets/GrupoIcon.png');
@@ -31,8 +32,7 @@ const Home = () => {
 
   const handleEdit = (grupoId: string | undefined) => {
     if (grupoId !== undefined) {
-      navigation.navigate('Home2', { id_grupo_desejado: grupoId })
-       // Passa o ID do grupo como parâmetro para Home2
+      navigation.navigate('Home2', { id_grupo_desejado: grupoId });
     }
   };
 
@@ -44,8 +44,7 @@ const Home = () => {
           alert('Grupo excluído com sucesso!');
           fetchGrupos(); // Atualiza a lista de grupos após a exclusão
         } else {
-          alert('Grupo excluído com sucesso.');
-          
+          alert('Não foi possível excluir o grupo.');
         }
       } catch (error) {
         console.error('Erro ao excluir grupo:', error);
@@ -53,38 +52,31 @@ const Home = () => {
     }
   };
 
-  const renderItem = ({ item, index }: { item: Grupo; index: number }) => (
-    <View style={styles.item}>
-      <View style={styles.itemContent}>
-        <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
-        <Text style={[styles.text, { marginVertical: 10 }]}>
-          {item.nome}
-        </Text>
-      </View>
+  const renderItem = ({ item }: { item: Grupo }) => (
+    <Card
+      imgSrc={mascoteImage}
+      spanTag= {item.nome}
+      // views="0"
+      // reads="0"
+      // comment="0"
+      color="blue"
+      onPress={async () => handleEdit(item.id)}
+    >
       <View style={styles.buttons}>
-        <CustomButton
-          title='Editar'
-          onPress={async () => handleEdit(item.id)}
-          style={{ marginVertical: 5 }}
-        />
-        <CustomButton
-          title='Remover'
-          onPress={async () => handleExcluirUser(item.id)}
-          style={{ marginVertical: 5 }}
-        />
+        {/* <CustomButton title='Editar' onPress={async () => handleEdit(item.id)} style={{ marginVertical: 5 }} /> */}
       </View>
-    </View>
+      <CustomButton title='Remover' onPress={async () => handleExcluirUser(item.id)} style={{ marginVertical: 5 }} />
+    </Card>
   );
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>
-        <FlatList
-          data={Grupos}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={styles.flatListContent}
-        />
+        {Grupos && Grupos.map((grupo, index) => (
+          <View key={index}>
+            {renderItem({ item: grupo })}
+          </View>
+        ))}
         <View style={styles.buttonContainer}>
           <CustomButton
             title='Novo Grupo'
@@ -112,18 +104,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     width: '100%',
   },
-  item: {
-    flexDirection: 'column',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: '#ccc',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 500,
-    maxWidth: 600,
-    marginTop: 50,
-  },
   itemContent: {
     alignItems: 'center',
   },
@@ -131,12 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    maxWidth: 300,
-  },
-  photo: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    maxWidth: 600,
   },
   buttonContainer: {
     marginVertical: 20,

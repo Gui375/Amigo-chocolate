@@ -68,8 +68,10 @@ const Home2 = () => {
       />
 
       <View style={styles.container}>
-        <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home'); }}></CustomButton>
+
+        <CustomButton title='Excluir Grupo?' onPress={}} ></CustomButton>
         <CustomButton title='Enviar convite' onPress={async () => { await navigation.navigate('Convite'); }}></CustomButton>
+        <CustomButton title='Voltar' onPress={async () => { await navigation.navigate('Home'); }}></CustomButton>
       </View>
     </ScrollView>
   );
