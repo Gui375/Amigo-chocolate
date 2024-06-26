@@ -25,7 +25,7 @@ class GrupoService {
           return response.status === 200; // Retorna true se o grupo foi excluído com sucesso
     
         } catch (error) {
-          console.error('Erro ao excluir Grupo:', error);
+          console.error('Grupo excluido', error);
           return false; // Retorna false em caso de erro
         }
       }

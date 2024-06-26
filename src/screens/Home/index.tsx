@@ -42,12 +42,13 @@ const Home = () => {
         const remove = await grupoService.removeGrupo(grupoId);
         if (remove) {
           alert('Grupo excluído com sucesso!');
+          console.log(remove)
           fetchGrupos(); // Atualiza a lista de grupos após a exclusão
         } else {
-          alert('Não foi possível excluir o grupo.');
+          alert('Erro');
         }
       } catch (error) {
-        console.error('Erro ao excluir grupo:', error);
+        console.error('Grupo excluído com sucesso:', error);
       }
     }
   };
@@ -59,7 +60,7 @@ const Home = () => {
       // views="0"
       // reads="0"
       // comment="0"
-      color="blue"
+      color="#5C3317"
       onPress={async () => handleEdit(item.id)}
     >
       <View style={styles.buttons}>
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 60,
     marginTop: 50,
     width: '100%',
   },
