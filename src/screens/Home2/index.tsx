@@ -86,13 +86,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     maxWidth: 400,
-    marginTop: 50,
+    marginTop: 20,
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    marginBottom: 35
   },
   userInfo: {
     flexDirection: 'row',

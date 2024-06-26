@@ -20,36 +20,56 @@ const Cadastro = () => {
   const [NewPassword, setNewPassword] = useState<string>('');
   const [NewConfPassword, setNewConfPassword] = useState<string>('');
   const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+
+
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+
 
   const userService = new UserService();
 const teste = async() =>{
 console.log(NovoUsuario)
 }
-  const handleCadastroUsuario = async (usuario: User) => {
-    const userService = new UserService();
-    try {
-        const success = await userService.addUser(usuario);
-        if (Newlogin == '' || NewEmail == '' || NewPassword =='') {
-          alert('Erro ao criar usuário!')
-          return false
-        }
-        if (NewPassword != NewConfPassword) {
-          alert('Senha divergente!')
-          return false
-        }
-        if (success) {
-          alert('Usuario Cadastrado com sucesso!')
-          navigation.navigate('Login')
-        } else{
-          alert('Erro ao criar Usuário!')         
-          return false
-        }
-        
-        
-    } catch (error) {
 
+
+
+
+const handleCadastroUsuario = async (usuario: User) => {
+  if (Newlogin === '' || NewEmail === '' || NewPassword === '') {
+    alert('Erro ao criar usuário!');
+    return false;
+  }
+
+  if (!validateEmail(NewEmail)) {
+    setEmailError(true);
+    return false;
+  } else {
+    setEmailError(false);
+  }
+
+  if (NewPassword !== NewConfPassword) {
+    alert('Senha divergente!');
+    return false;
+  }
+
+  try {
+    const success = await userService.addUser(usuario);
+    if (success) {
+      alert('Usuário Cadastrado com sucesso!');
+      navigation.navigate('Login');
+    } else {
+      alert('Erro ao cadastrar!');
+      return false;
     }
+  } catch (error) {
+    alert('Erro ao criar Usuário!');
+  }
 };
+
 
 const NovoUsuario : User={
   nome: Newlogin,
@@ -62,45 +82,44 @@ console.log(NovoUsuario)
 //O que será mostrado no site
   return (
     <View style={styles.container}>
-        <div style={styles.div}>
-
+      <div style={styles.div}>
         <h1 style={styles.title}>Cadastro</h1>
         <br />
         <br />
-  
-      <TextInput
-        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="Usuário"
-        onChangeText={setNewLogin}
-        value={Newlogin}
-      />
-      <TextInput
-        style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
-        placeholder="E-mail"
-        onChangeText={setNewEmail}
-        value={NewEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry={true}
-        onChangeText={setNewPassword}
-        value={NewPassword}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirmar Senha"
-        secureTextEntry={true}
-        onChangeText={setNewConfPassword}
-        value={NewConfPassword}
-      />
 
-      <View style={styles.container}>
-       <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario(NovoUsuario)}  ></CustomButton>
-       </View>
-    </div>
+        <TextInput
+          style={[styles.input, usernameError && styles.errorInput]} // Aplicar estilo de erro se usernameError for true
+          placeholder="Usuário"
+          onChangeText={setNewLogin}
+          value={Newlogin}
+        />
+        <TextInput
+          style={[styles.input, emailError && styles.errorInput]} // Aplicar estilo de erro se emailError for true
+          placeholder="E-mail"
+          onChangeText={setNewEmail}
+          value={NewEmail}
+        />
+        {emailError && <Text style={styles.errorText}>Email inválido</Text>}
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry={true}
+          onChangeText={setNewPassword}
+          value={NewPassword}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirmar Senha"
+          secureTextEntry={true}
+          onChangeText={setNewConfPassword}
+          value={NewConfPassword}
+        />
+
+        <View style={styles.container}>
+          <CustomButton title='Cadastrar' onPress={() => handleCadastroUsuario(NovoUsuario)}></CustomButton>
+        </View>
+      </div>
     </View>
-   
   );
 };
 
@@ -119,6 +138,9 @@ console.log(NovoUsuario)
       borderRadius: 16,
       alignItems: 'center', // Centraliza os itens horizontalmente
       flexDirection: 'column', // Empilha os itens verticalmente
+    },
+    errorInput: {
+      borderColor: 'red', // Alterar a cor da borda para vermelho se houver erro
     },
     title: {
       fontSize: 26, 

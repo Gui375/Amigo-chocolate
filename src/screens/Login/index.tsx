@@ -18,10 +18,13 @@ const Login = () => {
     const [password, setPassword] = useState<string>('');
     const [usernameError, setUsernameError] = useState(false);
     const [Email,setNewEmail] = useState<string> ('')
-  
+    const [emailError, setEmailError] = useState(false);
+
     const userService = new UserService();
     
     const navigation = useNavigation<StackTypes>();
+
+
 
     const handleLogin = async () => {
       const userId = 1;
