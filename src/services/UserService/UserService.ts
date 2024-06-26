@@ -31,27 +31,22 @@ class UserService {
   }
 
 
-  async getUsersByGroupId(groupId: string): Promise<User[] | null> {
+  async getUsersByGroupId(groupId: string): Promise<{ id_usuario: string }[] | null> {
     try {
-      const response: AxiosResponse<User[]> = await axios.get(`${BASE_URL_UsGr}/${groupId}`);
+      const response: AxiosResponse<{ id_usuario: string }[]> = await axios.get(`${BASE_URL_UsGr}/${groupId}`);
       return response.data;
     } catch (error) {
       console.error('Erro ao buscar usuários por ID de grupo:', error);
       return null;
     }
   }
-
-  async addUser(usuario: User): Promise<boolean> {
+async addUser(usuario: User): Promise<boolean> {
     try {
-      // Verifica se o ID já existe na API
-
-      // Se o ID não existe, adiciona o usuário
       const response = await axios.post(BASE_URL, usuario);
-      return response.status === 201; // Retorna true se o usuário foi adicionado com sucesso
-
+      return response.status === 201;
     } catch (error) {
       console.error('Erro ao adicionar usuário:', error);
-      return false; // Retorna false em caso de erro
+      return false;
     }
   }
 
@@ -93,16 +88,15 @@ class UserService {
     async getUserById(userId: string): Promise<User | null> {
       try {
         const response: AxiosResponse<User> = await axios.get(`${BASE_URL}/${userId}`);
-        return response.data; // Retorna o usuário se encontrado
-
-      } catch (error: AxiosError | any) { 
+        return response.data;
+      } catch (error: AxiosError | any) {
         if (error.response && error.response.status === 404) {
-          return null; // Retorna null se o usuário não existir
+          return null;
         } else {
-          throw error; // Lança qualquer outro erro que ocorrer
+          throw error;
         }
-      }}
-
+      }
+    }
 
   async getAllUsers(): Promise<User[] | null> {
     try {

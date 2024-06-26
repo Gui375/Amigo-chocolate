@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { StackTypes } from '../../routes/stack';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { FlatList, Text, View, Image, StyleSheet, ScrollView } from 'react-native';
 import UserService from '../../services/UserService/UserService';
@@ -18,8 +17,14 @@ const Home2 = () => {
   useEffect(() => {
     const fetchUsersByGroup = async () => {
       try {
-        const fetchedUsers = await userService.getUsersByGroupId(id_grupo_desejado);
-        setUsers(fetchedUsers);
+        const groupUsers = await userService.getUsersByGroupId(id_grupo_desejado);
+        if (groupUsers) {
+          const usersWithDetails = await Promise.all(groupUsers.map(async (groupUser) => {
+            const userDetails = await userService.getUserById(groupUser.id_usuario);
+            return userDetails;
+          }));
+          setUsers(usersWithDetails.filter(user => user !== null));
+        }
       } catch (error) {
         console.error('Erro ao buscar usuários por ID de grupo:', error);
       }
@@ -33,9 +38,9 @@ const Home2 = () => {
       <View style={styles.item}>
         <View style={styles.userInfo}>
           <Image source={mascoteImage} style={styles.photo} resizeMode="contain" />
-          <Text style={styles.userInfoText}>{item.username}</Text>
-          <CustomButton title='Remover' onPress={async () => { handleExcluirUser(item.id) }}></CustomButton>
+          <Text style={styles.userInfoText}>{item.nome}</Text>
         </View>
+        <CustomButton title='Remover' onPress={async () => { handleExcluirUser(item.id) }}></CustomButton>
       </View>
     </ScrollView>
   );
